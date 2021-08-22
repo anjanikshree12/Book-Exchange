@@ -7,23 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    
-<%- include('../includes/nav.ejs') %>
     <main>
         <% if (prods.length > 0) { %>
-            <div class="grid">
-                <a href="<%=path%>?orderBy=true">order by price</a>
+            <div>
                 <% for (let product of prods) { %>
-                    <article>
-                        <header>
-                            <h1 class="product__title"><%= product.title %></h1>
-                        </header>
                         <div>
-                            <h2><%= product.price %></h2>
-                            <p><%= product.description %></p>
+                            <h2><a href="/genreBook/<%=product.genre%>"><%= product.genre %></a></h2>
+                            <!-- <p><%= product.description %></p> -->
                         </div>
-                        
-                    </article>
                 <% } %>
             </div>
         <% } else { %>

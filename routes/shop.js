@@ -7,6 +7,6 @@ router.get('/',isAuth,shopController.getHomePage);
 router.get('/cityBook',isAuth,shopController.getCityBook);
 router.get('/topAuthor',isAuth,shopController.getTopAuthors);
 router.get('/authorBooks/:id',isAuth,shopController.getAuthorBooks);
-
-
+router.get('/genreBook/:genre',isAuth,shopController.getBooksByGenre);
+router.get('/genre',isAuth,shopController.getGenre);
 module.exports=router

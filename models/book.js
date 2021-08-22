@@ -24,11 +24,18 @@ class Book{
 
     }
 
-    static getBookByCity(cityName){
-        console.log(cityName);
-        const command="SELECT books.id,title,price FROM (SELECT * FROM users WHERE city=?) as u " 
+    static getBookByCity(cityName,orderBy){
+        let command;
+        if(orderBy=='true'){
+            command="SELECT books.id,title,price FROM (SELECT * FROM users WHERE city=?) as u " 
+            +"JOIN books " 
+            +"ON u.id=user_id ORDER BY price;"
+        }else{
+        // console.log(cityName);
+        command="SELECT books.id,title,price FROM (SELECT * FROM users WHERE city=?) as u " 
         +"JOIN books " 
         +"ON u.id=user_id;"
+        }
         return db.execute(command,[cityName]); 
     }
     static getBookByUserId(userId){
@@ -50,9 +57,28 @@ class Book{
         return db.execute(command);
     }
 
-    static getBookByAuthorId(authorId){
-        const command=" SELECT *FROM books WHERE author_id=?";
+    static getBookByAuthorId(authorId,orderByPrice){
+        let command
+        if(orderByPrice=='true'){
+            command="SELECT *FROM books WHERE author_id=? ORDER BY price";
+        }else
+        command=" SELECT *FROM books WHERE author_id=?";
         return db.execute(command,[authorId]);
+    }
+
+    static getBookByGenre(genre,orderByPrice){
+        let command;
+        if(orderByPrice=='true'){
+            command="SELECT *FROM books where genre=? ORDER BY price";
+        }else{
+            command="SELECT *FROM books where genre=?";
+        }
+        return db.execute(command,[genre]);
+    }
+
+    static getGenre(){
+        let command="SELECT * FROM books GROUP BY genre";
+        return db.execute(command);
     }
 
 }
