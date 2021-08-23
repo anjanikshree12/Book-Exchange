@@ -1,6 +1,7 @@
 const author = require('../models/author');
 const { getBookByCity } = require('../models/book');
 const Book=require('../models/book')
+const Cart=require('../models/cart')
 
 exports.getHomePage=(req,res,next)=>{
     // console.log(req.session.user);
@@ -85,5 +86,79 @@ exports.getBooksByGenre=(req,res,next)=>{
 }
 
 
+exports.addToCart=(req,res,next)=>{
+    // console.log(req.body);
+    const bookId=req.body.bookId;
+    const userId=req.user.id
+    const path=req.body.path;
+    const cart= new Cart(bookId,userId);
+    // console.log(cart);
+    cart.checkIfExists()
+    .then(result=>{
+        if(result[0].length!=0){
+            return res.redirect(path);
+        }else{
+            return cart.addToCart()
+            .then(result=>{
+                console.log('added to cart');
+                res.redirect('/cart');
+            })
+        }
+        console.log(result);
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+exports.getCart=(req,res,next)=>{
+    const userId=req.user.id;
+    const orderBy=req.query.orderBy;
+    console.log(orderBy);
+    Cart.getCart(userId)
+    .then(result=>{
+        console.log(result[0]);
+        let bookIds=[];
+        for(let i=0;i<result[0].length;i++){
+            bookIds.push(result[0][i].book_id);
+        }
+        console.log(bookIds);
+        Book.getBookInArray(bookIds,orderBy)
+        .then(result=>{
+            Book.getTotalPrice(bookIds)
+            .then(result1=>{
+                console.log();
+                res.render('shop/cart',{
+                    prods:result[0],
+                    path:'/cart',
+                    cost:result1[0][0].cost
+                })
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+            console.log(result[0]);
+            
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
 
 
+exports.removeFromCart=(req,res,next)=>{
+    const bookId=req.body.bookId;
+    const userId=req.user.id;
+    Cart.removeFromCart(bookId,userId)
+    .then(result=>{
+        res.redirect('/cart');
+        console.log('removed From Cart');
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}

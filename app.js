@@ -65,6 +65,12 @@ const bookTable="CREATE TABLE IF NOT EXISTS `books`("
     +'FOREIGN KEY (author_id) REFERENCES authors(id) , '
     +"FOREIGN KEY (user_id) REFERENCES users(id));"
 
+const cartTable="CREATE TABLE IF NOT EXISTS `cart`("
+    +"`id` INT PRIMARY KEY AUTO_INCREMENT, "
+    +"`book_id` INT, "
+    +"`user_id` INT, "
+    +"FOREIGN KEY (book_id) REFERENCES books(id), "
+    +"FOREIGN KEY (user_id) REFERENCES users(id));"
 
 
 
@@ -93,6 +99,13 @@ db.execute(bookTable)
     console.log(err);
 })
 
+db.execute(cartTable)
+.then(result=>{
+    console.log('cart table created');
+})
+.catch(err=>{
+    console.log(err);
+})
 
 app.use(authRoutes);
 app.use(shopRoutes);

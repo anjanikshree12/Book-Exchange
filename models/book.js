@@ -81,6 +81,19 @@ class Book{
         return db.execute(command);
     }
 
+    static getBookInArray(bookIds,orderBy){
+        let command;
+        if(orderBy=='true')
+        command="SELECT * FROM books WHERE id IN (?) ORDER BY price;";
+        else
+        command="SELECT * FROM books WHERE id IN (?);";
+        return db.query(command,[bookIds]);
+    }
+
+    static getTotalPrice(bookIds){
+        const command="SELECT SUM(price) AS cost FROM books WHERE id IN (?);"
+        return db.query(command,[bookIds]);
+    }
 }
 
 module.exports=Book;

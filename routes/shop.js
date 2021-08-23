@@ -9,4 +9,7 @@ router.get('/topAuthor',isAuth,shopController.getTopAuthors);
 router.get('/authorBooks/:id',isAuth,shopController.getAuthorBooks);
 router.get('/genreBook/:genre',isAuth,shopController.getBooksByGenre);
 router.get('/genre',isAuth,shopController.getGenre);
+router.post('/addToCart',isAuth,shopController.addToCart);
+router.get('/cart',isAuth,shopController.getCart);
+router.post('/removeFromCart',isAuth,shopController.removeFromCart)
 module.exports=router

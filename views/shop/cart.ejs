@@ -21,16 +21,16 @@
                         <div>
                             <h2><%= product.price %></h2>
                             <p><%= product.description %></p>
-                            <form action="/addToCart" method="POST">
-                                <input type="hidden" value="<%= product.id %>" name="bookId">
-                                <input type="hidden" value="<%=path%>" name="path">
-                                <button class="btn" type="submit">Add To Cart</button>            
+                            <form action="/removeFromCart" method="POST">
+                                <input type="hidden" name="bookId"   value="<%=product.id%>">
+                                <button type="submit">Remove this item from cart</button>
                             </form>
                         </div>
                         
                     </article>
                 <% } %>
             </div>
+            <p>total cost of items in cart: <%=cost%></p>
         <% } else { %>
             <h1>No Products Found!</h1>
         <% } %>

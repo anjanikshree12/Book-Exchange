@@ -12,4 +12,6 @@ router.post('/addBook',isAuth,adminController.postAddBook);
 router.get('/myBooks',isAuth,adminController.getMyBook);
 
 router.post('/deleteBook',isAuth,adminController.deleteBook);
+
+
 module.exports=router
