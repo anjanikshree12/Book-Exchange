@@ -62,16 +62,33 @@ const bookTable="CREATE TABLE IF NOT EXISTS `books`("
     +'`author_id` INT NOT NULL,'
     +'`language` VARCHAR(30) NOT NULL, '
     +'`genre` VARCHAR (30) NOT NULL, '
-    +'FOREIGN KEY (author_id) REFERENCES authors(id) , '
-    +"FOREIGN KEY (user_id) REFERENCES users(id));"
+    +'`available` BOOL DEFAULT 1, ' 
+    +'FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE CASCADE, '
+    +"FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE);"
 
 const cartTable="CREATE TABLE IF NOT EXISTS `cart`("
     +"`id` INT PRIMARY KEY AUTO_INCREMENT, "
     +"`book_id` INT, "
     +"`user_id` INT, "
-    +"FOREIGN KEY (book_id) REFERENCES books(id), "
-    +"FOREIGN KEY (user_id) REFERENCES users(id));"
+    +"FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE, "
+    +"FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE);"
 
+
+
+const orderTable="CREATE TABLE IF NOT EXISTS `orders`("
+    +"`id` INT PRIMARY KEY AUTO_INCREMENT, "
+    +"`user_id` INT NOT NULL, "
+    +"`order_amount` DECIMAL(7,2) NOT NULL, "
+    +"`order_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+    +"FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE);"
+
+
+const orderItemsTable="CREATE TABLE IF NOT EXISTS `order_items`("
+    +"`id` INT PRIMARY KEY AUTO_INCREMENT, "
+    +"`book_id` INT NOT NULL, "
+    +"`order_id` INT NOT NULL, "
+    +"FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE, "
+    +"FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE); "
 
 
 db.execute(user_table)
@@ -106,6 +123,25 @@ db.execute(cartTable)
 .catch(err=>{
     console.log(err);
 })
+
+db.execute(orderTable)
+.then(result=>{
+    console.log('orders table created');
+})
+.catch(err=>{
+    console.log(err);
+})
+
+db.execute(orderItemsTable)
+.then(result=>{
+    console.log('order items table created');
+})
+.catch(err=>{
+    console.log(err);
+})
+
+
+
 
 app.use(authRoutes);
 app.use(shopRoutes);

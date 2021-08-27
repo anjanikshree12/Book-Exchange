@@ -25,6 +25,10 @@ class Cart{
         let command="DELETE FROM cart WHERE book_id=? AND user_id=?";
         return db.execute(command,[bookId,userId]);
     }
+    static removeFromCartByUserId(userId){
+        let command="DELETE FROM cart WHERE user_id=?";
+        return db.execute(command,[userId]);
+    }
 
 }
 

@@ -12,4 +12,6 @@ router.get('/genre',isAuth,shopController.getGenre);
 router.post('/addToCart',isAuth,shopController.addToCart);
 router.get('/cart',isAuth,shopController.getCart);
 router.post('/removeFromCart',isAuth,shopController.removeFromCart)
+router.post('/order',isAuth,shopController.postOrder);
+router.get('/showOrders',isAuth,shopController.getOrders);
 module.exports=router

@@ -31,8 +31,13 @@
                 <% } %>
             </div>
             <p>total cost of items in cart: <%=cost%></p>
+            <form action="/order" method="POST">
+                <%console.log(books)%>
+                <input type="hidden" name="bookIds" value="<%=books%>">
+                <button type="submit">order Now!</button>
+            </form>
         <% } else { %>
-            <h1>No Products Found!</h1>
+            <h1>No items in cart</h1>
         <% } %>
     </main>
 </body>

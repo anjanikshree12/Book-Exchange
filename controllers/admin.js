@@ -47,7 +47,7 @@ exports.postAddBook=(req,res,next)=>{
                 book.addBook()
                 .then(result=>{
                     console.log('book-added!');
-                    res.redirect('/cityBook')
+                    res.redirect('/myBooks')
                 })
                 .catch(err=>{
                     console.log(err);
