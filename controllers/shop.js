@@ -7,7 +7,19 @@ const OrderItem=require('../models/orderItem');
 
 exports.getHomePage=(req,res,next)=>{
     // console.log(req.session.user);
-    res.render('shop/home');
+    const orderBy=req.params.orderBy;
+    Book.getAllBooks(orderBy)
+    .then(result=>{
+        res.render('shop/bookCity',{
+            prods:result[0],
+            path:'/'
+        })
+        console.log(result[0]);
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+    // res.render('shop/home');
 }
 
 
@@ -97,20 +109,28 @@ exports.addToCart=(req,res,next)=>{
     const bookId=req.body.bookId;
     const userId=req.user.id
     const path=req.body.path;
-    const cart= new Cart(bookId,userId);
-    // console.log(cart);
-    cart.checkIfExists()
+    Book.getOwner(bookId)
     .then(result=>{
-        if(result[0].length!=0){
-            return res.redirect(path);
-        }else{
-            return cart.addToCart()
-            .then(result=>{
-                console.log('added to cart');
-                res.redirect('/cart');
-            })
+        // console.log(result[0]);
+        const owner=result[0][0].user_id;
+        if(owner==userId){
+            return res.redirect(path)
         }
-        console.log(result);
+        const cart= new Cart(bookId,userId,owner);
+        console.log(cart);
+        return cart.checkIfExists()
+        .then(result=>{
+            if(result[0].length!=0){
+                return res.redirect(path);
+            }else{
+                return cart.addToCart()
+                .then(result=>{
+                    console.log('added to cart');
+                    res.redirect('/cart');
+                })
+            }
+            console.log(result);
+        })
     })
     .catch(err=>{
         console.log(err);
@@ -201,8 +221,14 @@ exports.postOrder=(req,res,next)=>{
             console.log('orders added');
             return Cart.removeFromCartByUserId(user_id)
             .then(result=>{
-                console.log('items removed from cart');
-                res.redirect('/cart');
+                return Book.makeUnavailable(books)
+                .then(result=>{
+                    console.log('items removed from cart');
+                    res.redirect('/cart');
+                })
+                .catch(err=>{
+                    console.log();
+                })
             })
             
         })
@@ -221,17 +247,19 @@ exports.postOrder=(req,res,next)=>{
 exports.getOrders=(req,res,next)=>{
     Order.getOrdersByUserId(req.user.id)
     .then(result=>{
-        console.log(result[0].length);
+        console.log(result[0]);
         let orders=[];
         let curord;
         let cur=[];
         for(let i=0;i<result[0].length;i++){
-
             // console.log(temp);
             if(i==0){
                 curord=result[0][i].order_id;
-                cur.push(result[0][i])
-                continue;
+                cur.push(result[0][i]);
+                if(i==result[0].length-1){
+                    orders.push(cur);
+                    break;
+                }
             }
             if(result[0][i].order_id!=curord){
                 console.log('nequal');
@@ -251,7 +279,9 @@ exports.getOrders=(req,res,next)=>{
             
             // console.log(curdate);
         }
+        console.log(orders)
         res.render('shop/orders',{
+            
             orders:orders
         })
         console.log(orders);
@@ -260,3 +290,4 @@ exports.getOrders=(req,res,next)=>{
         console.log(err);
     })
 }
+

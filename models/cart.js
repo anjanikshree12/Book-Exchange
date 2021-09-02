@@ -2,9 +2,10 @@ const db=require('../utils/database');
 
 
 class Cart{
-    constructor(bookId,userId){
+    constructor(bookId,userId,owner){
         this.bookId=bookId;
         this.userId=userId;
+        this.owner=owner
     }
 
     checkIfExists(){

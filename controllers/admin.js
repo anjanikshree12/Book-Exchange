@@ -8,11 +8,17 @@ exports.getAddBook=(req,res,next)=>{
 }
 
 exports.postAddBook=(req,res,next)=>{
+    console.log(req.body);
     const title=req.body.title;
-    const price=req.body.price;
+    const orignal_price=req.body.orignal_price;
+    const selling_price=req.body.selling_price;
     const genre=req.body.genre;
     const language=req.body.language;
     const authorName=req.body.author;
+    const image=req.file;
+    const imageUrl=image.path;
+    // console.log();
+    console.log(image);
     const user_id=req.user.id;
     let author_id;
     Author.findByName(authorName)
@@ -42,7 +48,7 @@ exports.postAddBook=(req,res,next)=>{
     .then(aid=>{
                 console.log("final"+aid);
                 // console.log(req.body);
-                const book=new Book(title,price,user_id,genre,language,aid);
+                const book=new Book(title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl);
                 console.log(book);
                 book.addBook()
                 .then(result=>{
@@ -66,7 +72,7 @@ exports.postAddBook=(req,res,next)=>{
 exports.getMyBook=(req,res,next)=>{
     Book.getBookByUserId(req.user.id)
     .then(books=>{
-        // console.log(books[0]);
+        console.log(books[0]);
         res.render('admin/myBook',{
             prods:books[0]
         })
@@ -79,7 +85,7 @@ exports.getMyBook=(req,res,next)=>{
 exports.deleteBook=(req,res,next)=>{
     console.log(req.body);
     const book_id=req.body.id;
-    Book.deleteBookById(book_id)
+    Book.deleteBookById(book_id,req.user.id)
     .then(result=>{
         console.log("book deleted");
         res.redirect('/myBooks');

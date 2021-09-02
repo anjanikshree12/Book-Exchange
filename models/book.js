@@ -2,18 +2,20 @@ const db=require('../utils/database');
 
 
 class Book{
-    constructor(title,price,user_id,genre,language,author_id){
+    constructor(title,orignal_price,selling_price,user_id,genre,language,author_id,imageUrl){
         this.title=title;
-        this.price=price;
+        this.orignal_price=orignal_price;
+        this.selling_price=selling_price;
         this.genre=genre;
         this.language=language;
         this.user_id=user_id;
         this.author_id=author_id;
+        this.imageUrl=imageUrl
     }
 
     addBook(){
-        const command="INSERT INTO BOOKS(title,price,genre,language,author_id,user_id) VALUES(?,?,?,?,?,?)";
-        return db.execute(command,[this.title,this.price,this.genre,this.language,this.author_id,this.user_id]);
+        const command="INSERT INTO BOOKS(title,orignal_price,selling_price,genre,language,author_id,user_id,imageUrl) VALUES(?,?,?,?,?,?,?,?)";
+        return db.execute(command,[this.title,this.orignal_price,this.selling_price,this.genre,this.language,this.author_id,this.user_id,this.imageUrl]);
     }
 
     static getBookByAuthor(){
@@ -25,55 +27,49 @@ class Book{
     }
 
     static getBookByCity(cityName,orderBy,userID){
-        let command;
-        if(orderBy=='true'){
-            command="SELECT books.id,title,price FROM (SELECT * FROM users WHERE city=?) as u " 
-            +"JOIN books " 
-            +"ON u.id=user_id ORDER BY price WHERE user_id!=? AND books.available=1;"
-        }else{
-        // console.log(cityName);
-        command="SELECT books.id,title,price FROM (SELECT * FROM users WHERE city=?) as u " 
+        let command="SELECT books.id,title,orignal_price,selling_price,imageUrl FROM (SELECT * FROM users WHERE city=?) as u " 
         +"JOIN books " 
-        +"ON u.id=user_id WHERE user_id!=? AND books.available=1;"
+        +"ON u.id=user_id WHERE user_id!=? AND books.available=1 ";
+        if(orderBy=='true'){
+            command+="ORDER BY orignal_price ;"
         }
         return db.execute(command,[cityName,userID]); 
     }
     static getBookByUserId(userId){
-        const command="SELECT books.id,title,price FROM users "
+        const command="SELECT books.id,title,selling_price,orignal_price,available,imageUrl FROM users "
         +"JOIN books "
         +"ON users.id=user_id "
-        +"WHERE users.id=? AND books.available=1;"
+        +"WHERE users.id=?;"
         return db.execute(command,[userId]);
     }
 
-    static deleteBookById(book_id){
+    static deleteBookById(book_id,user_id){
         const command="DELETE FROM books "
-        +"WHERE id=?";
-        return db.execute(command,[book_id]);
+        +"WHERE id=? AND user_id=? AND AVAILABLE=1";
+        return db.execute(command,[book_id,user_id]);
     }
 
     static getTopAuthors(){
-        const command=" SELECT * FROM  ( SELECT author_id,count(*) as c from books group by author_id  ) AS b  JOIN authors on b.author_id=authors.id order by b.c desc LIMIT 10" 
+        const command=" SELECT * FROM  ( SELECT author_id,count(*) as c from books WHERE available=1 group by author_id  ) AS b  JOIN authors on b.author_id=authors.id order by b.c desc LIMIT 10" 
         return db.execute(command);
     }
 
     static getBookByAuthorId(authorId,orderByPrice,userId){
-        let command
+        let command="SELECT * FROM books WHERE author_id=? AND available=1";
+
         if(orderByPrice=='true'){
-            command="SELECT *FROM books WHERE author_id=? AND user_id!=? AND available=1 ORDER BY price ";
-        }else
-        command=" SELECT *FROM books WHERE author_id=? AND user_id!=? AND available=1";
-        return db.execute(command,[authorId,userId]);
+            command+=" ORDER BY orignal_price;"
+        }
+        return db.execute(command,[authorId]);
     }
 
     static getBookByGenre(genre,orderByPrice,userId){
-        let command;
+            let command="SELECT * FROM books where genre=?  AND available=1 ";
+         
         if(orderByPrice=='true'){
-            command="SELECT *FROM books where genre=? AND user_id!=? AND available=1 ORDER BY price";
-        }else{
-            command="SELECT *FROM books where genre=? AND user_id!=? AND available=1";
+            command+="ORDER BY orignal_price;"
         }
-        return db.execute(command,[genre,userId]);
+        return db.execute(command,[genre]);
     }
 
     static getGenre(){
@@ -82,20 +78,33 @@ class Book{
     }
 
     static getBookInArray(bookIds,orderBy){
-        let command;
+        let command="SELECT * FROM books WHERE id IN (?) ";
         if(orderBy=='true')
-        command="SELECT * FROM books WHERE id IN (?) ORDER BY price;";
-        else
-        command="SELECT * FROM books WHERE id IN (?);";
+        command="ORDER BY orignal_price;";
         return db.query(command,[bookIds]);
     }
 
     static getTotalPrice(bookIds){
-        const command="SELECT SUM(price) AS cost FROM books WHERE id IN (?);"
+        const command="SELECT SUM(orignal_price) AS cost FROM books WHERE id IN (?);"
         return db.query(command,[bookIds]);
     }
 
+    static makeUnavailable(books){
+        const command="UPDATE books SET available=0 WHERE id IN (?);"
+        return db.query(command,[books]);
+    }
     
+    static getAllBooks(orderBy){
+        const command="SELECT * FROM BOOKS WHERE AVAILABLE=1";
+        if(orderBy=='true'){
+            command+=' ORDER BY orignal_price';
+        }
+        return db.execute(command)
+    }
+    static getOwner(book_id){
+        const command="SELECT user_id FROM books WHERE id=?";
+        return db.execute(command,[book_id]);
+    }
 }
 
 module.exports=Book;

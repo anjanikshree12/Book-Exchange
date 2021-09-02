@@ -10,14 +10,18 @@
     <%- include('../includes/nav.ejs') %>
     <main>
         <h1>Add book</h1>
-        <form  action="/addBook" method="POST">
+        <form  action="/addBook" method="POST" enctype="multipart/form-data">
             <div >
                 <label for="title">Title</label>
                 <input type="string" name="title" id="title">
             </div>
             <div >
-                <label for="price">Price</label>
-                <input type="number" name="price" id="price">
+                <label for="selling_price">selling Price</label>
+                <input type="number" name="selling_price" >
+            </div>
+            <div >
+                <label for="orignal_price">orignal Price</label>
+                <input type="number" name="orignal_price">
             </div>
             <div >
                 <label for="language">Language</label>
@@ -30,6 +34,13 @@
             <div >
                 <label for="genre">Genre</label>
                 <input type="string" name="genre" id="genre">
+            </div>
+            <div>
+                <label for="image">Image</label>
+                <input 
+                    type="file" 
+                    name="image" 
+                    id="image" >
             </div>
             <button type="submit">Add Book</button>
         </form>
