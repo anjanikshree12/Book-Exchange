@@ -8,7 +8,7 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     database: 'booksite',
-    password: 'Readyfor@20'
+    password:
 });
 
 module.exports = pool.promise();
