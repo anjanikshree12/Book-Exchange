@@ -80,7 +80,7 @@ class Book{
     static getBookInArray(bookIds,orderBy){
         let command="SELECT * FROM books WHERE id IN (?) ";
         if(orderBy=='true')
-        command="ORDER BY orignal_price;";
+        command+="ORDER BY selling_price;";
         return db.query(command,[bookIds]);
     }
 
@@ -104,6 +104,14 @@ class Book{
     static getOwner(book_id){
         const command="SELECT user_id FROM books WHERE id=?";
         return db.execute(command,[book_id]);
+    }
+
+    static getBookDetailsById(id){
+        const command="SELECT books.id AS book_id,books.title AS title,books.language AS language,books.selling_price AS sp,books.orignal_price AS op,users.id AS user_id,users.city AS city,users.name AS name  FROM books " 
+        +"JOIN users "
+        +"ON users.id=books.user_id "
+        +"WHERE books.id=?";
+        return db.execute(command,[id]);
     }
 }
 

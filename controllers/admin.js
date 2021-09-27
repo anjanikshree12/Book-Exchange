@@ -1,6 +1,7 @@
 const Book=require('../models/book')
 const Author=require('../models/author');
 const Cart=require('../models/cart');
+const User = require('../models/user');
 
 exports.getAddBook=(req,res,next)=>{
     // console.log(req.user.id);
@@ -93,5 +94,15 @@ exports.deleteBook=(req,res,next)=>{
     .catch(err=>{
         console.log(err);
     })
-    
 }
+exports.getUserDetails=(req,res,next)=>{
+    const userId=req.params.id;
+    User.getUserDetailsById(userId)
+    .then(result=>{
+        console.log(result[0]);
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+

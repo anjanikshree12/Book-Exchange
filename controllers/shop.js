@@ -204,39 +204,54 @@ exports.removeFromCart=(req,res,next)=>{
 
 exports.postOrder=(req,res,next)=>{
     const user_id=req.user.id;
-    Order.addOrder(user_id)
-    .then(result=>{
-        const orderId=result[0].insertId;
-        const bookIds=req.body.bookIds;
-        let books=[];
-        for(let i=0;i<bookIds.length;i++){
-            if(bookIds[i]!=','){
-                books.push(bookIds[i]);
-            }
+    const bookIds=req.body.bookIds;
+    let books=[];
+    console.log(req.body);
+    let cur="";
+    for(let i=0;i<bookIds.length;i++){
+        if(bookIds[i]!=','){
+            cur+=bookIds[i];
+        }else{
+            books.push(cur);
+            cur="";
         }
-        console.log(books);
-        // console.log(req.body);
-        OrderItem.addItems(books,orderId)
-        .then(result=>{
-            console.log('orders added');
-            return Cart.removeFromCartByUserId(user_id)
+        if(i==bookIds.length-1){
+            books.push(cur);
+            cur="";
+        }
+    }
+    console.log(books);
+    Book.getTotalPrice(books)
+    .then(result1=>{
+            const orderAmount=result1[0][0].cost;
+            // console.log(orderAmount);
+            Order.addOrder(user_id,orderAmount)
             .then(result=>{
-                return Book.makeUnavailable(books)
-                .then(result=>{
-                    console.log('items removed from cart');
-                    res.redirect('/cart');
+            const orderId=result[0].insertId;
+            
+            
+                OrderItem.addItems(books,orderId)
+                .then(result2=>{
+                    console.log('orders added');
+                    return Cart.removeFromCartByUserId(user_id)
+                    .then(result3=>{
+                        return Book.makeUnavailable(books)
+                        .then(result4=>{
+                            console.log('items removed from cart');
+                            res.redirect('/cart');
+                        })
+                        .catch(err=>{
+                            console.log();
+                        })
+                    })
+                    
                 })
                 .catch(err=>{
-                    console.log();
-                })
-            })
-            
-        })
-        .catch(err=>{
-
-            console.log(err);
-        })
         
+                    console.log(err);
+                })
+                
+            })
     })
     .catch(err=>{
         console.log(err);
@@ -291,3 +306,25 @@ exports.getOrders=(req,res,next)=>{
     })
 }
 
+
+
+exports.getBookDetails=(req,res,next)=>{
+    const bookId=req.params.id;
+    console.log(bookId);
+    Book.getBookDetailsById(bookId)
+    .then(result=>{
+        console.log(result[0]);
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+
+}
+
+// var instance = new Razorpay({ key_id: 'rzp_test_jABxeqkaDNYGkh', key_secret: 'Y7LkvoQ0GkzpHHkrb9IjmvJ9' })
+// var options = {  
+//     amount: 50000,  // amount in the smallest currency unit  
+//     currency: "INR",  
+//     receipt: "order_rcptid_11"};
+// instance.orders.create(options, function(err, order){
+// console.log(order);});

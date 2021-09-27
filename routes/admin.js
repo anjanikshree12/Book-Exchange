@@ -13,5 +13,5 @@ router.get('/myBooks',isAuth,adminController.getMyBook);
 
 router.post('/deleteBook',isAuth,adminController.deleteBook);
 
-
+router.get('/userDetails/:id',isAuth,adminController.getUserDetails)
 module.exports=router
