@@ -1,0 +1,24 @@
+<html>
+    <nav>
+        <ul>
+            <li>
+                <%if(!isAuth){%>
+                <a href="/login">login</a>
+                
+                <a href="/signup">signup</a>
+                <%}%>
+                <a href="/addBook">Add Book</a>
+                <a href="/">home</a>
+                <a href="/cityBook">show Books in my area</a>
+                <a href="/myBooks">my Books</a>
+                <a href="/cart">Cart</a>
+                <a href="/showOrders">orders</a>
+                <%if(isAuth==true){%>
+                <form action="/logout" method="post">
+                    <button type="submit">Logout</button>
+                </form>
+                <%}%>
+            </li>
+        </ul>
+    </nav>
+</html>
