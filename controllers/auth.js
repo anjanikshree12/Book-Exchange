@@ -1,6 +1,8 @@
 const path=require('path');
 const User=require('../models/user')
 const bcrypt=require('bcrypt')
+
+
 exports.getLogin=(req,res,next)=>{
     // console.log(path.join(__dirname,'..','views','auth','login.html'));
     res.render('auth/index');
@@ -13,10 +15,15 @@ exports.getSignup=(req,res,next)=>{
 
 exports.postSignup=(req,res,next)=>{
     const email=req.body.email;
-    const name=req.body.name;
+    const firstName=req.body.firstName;
+    const lastName=req.body.lastName;
     const password=req.body.password;
     const city=req.body.city;
-    
+    const state=req.body.state;
+    const address=req.body.address;
+    const mobileNumber=req.body.mobileNumber;
+    const pincode=req.body.pincode;
+    console.log(req.body);
     User.getUserByEmail(email)
     .then(result=>{
         if(result[0].length!=0){
@@ -24,7 +31,7 @@ exports.postSignup=(req,res,next)=>{
         }
         return bcrypt.hash(password,12)
         .then(hashedPassword=>{
-            const user=new User(email,name,hashedPassword,city);
+            const user=new User(email,firstName,lastName,hashedPassword,city,state,address,pincode,mobileNumber);
             user.addUser()
             .then(result=>{
                 console.log('user stored');
