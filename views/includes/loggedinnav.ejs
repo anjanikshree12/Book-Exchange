@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="loggedin.html"><span class="fa fa-home"></span> Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/"><span class="fa fa-home"></span> Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="cart.html"><span class="fa fa-shopping-cart"></span> Cart </a>
@@ -16,7 +16,7 @@
             <a class="nav-link" href="wishlist.html"><span class="fa fa-heart"></span> Wishlist </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="UploadBooks.html"><span class="fa fa-plus-square"></span> Sell Books </a>
+            <a class="nav-link" href="/addBook"><span class="fa fa-plus-square"></span> Sell Books </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="mybook.html"><span class="fa fa-book"></span> My Books</a>
@@ -26,7 +26,7 @@
       </li>
         <li class="nav-item">
           <form action="/logout" method="post">
-          <button class="nav-link"  type="submit"><span class="fa fa-sign-out"></span> Log Out </a>
+          <button class="nav-link"  type="submit"><span class="fa fa-sign-out"></span> Log Out </button>
         </form>
         </li>
       </ul>
@@ -38,6 +38,7 @@
     
   </nav>
   <!-- nav 2 -->
+  <!-- <%if(path=='/'){%> -->
   <div class="nav2">
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -92,3 +93,4 @@
     </div>
   </nav>
 </div>
+<!-- <%}%> -->
