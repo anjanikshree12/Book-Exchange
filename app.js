@@ -11,6 +11,13 @@ const  MySQLStore = require('express-mysql-session')(session);
 const path=require('path');
 const multer=require('multer');
 
+console.log(__dirname + '/node_modules');
+
+
+app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname +'/node_modules'));
+app.use(express.static(path.join(__dirname, 'node_modules')));
+
 // path.dirname(process.mainModule.filename);
 const sessionStore = new MySQLStore({
     createDatabaseTable: true,
