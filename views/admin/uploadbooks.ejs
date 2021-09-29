@@ -13,48 +13,59 @@
             </div>
             <div class="row row-content mt-4 d-flex justify-content-center">
                 <div class="col-10 col-md-12">
-                    <form action="">
+                    <form action="/addBook" method="POST" enctype="multipart/form-data">
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
-                                <label for="bookname">Book Name</label>
-                                <input type="text" class="form-control" name="bookname" id="bookname"
+                                <label  for="bookname">Book Title</label>
+                                <input  name="title" type="text" class="form-control"  id="bookname"
                                     placeholder="Name of the Book" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="bookname">Author Name</label>
-                                <input type="text" class="form-control" name="authorname" id="authorname"
+                                <input  name="author" type="text" class="form-control" id="authorname"
                                     placeholder="Name of the Author" required>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-3 mb-3">
                                     <label for="bookname">Genre</label>
-                                    <input type="text" class="form-control" name="genrename" id="genrename"
+                                    <input name="genre" type="text" class="form-control"  id="genrename"
                                         placeholder="Book Genre" required>
+                                </div>
+                                <div >
+                                    <label for="language">Language</label>
+                                    <input type="string" name="language" id="language">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="condition">Condition</label>
-                                    <select class="custom-select" id="condition" name="condi" required>
+                                    <select name="condition" class="custom-select" id="condition"  required>
                                         <option selected disabled value="">Condition of the book</option>
-                                        <option>Best (No Scrathes or torn pages)</option>
-                                        <option>Average (Little scrathes on cover)</option>
-                                        <option>Bad(Not in good condition but good enough for use)</option>
+                                        <option>Best </option>
+                                        <option>Average</option>
+                                        <option>Bad</option>
                                     </select>
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="mrpprice">MRP</label>
-                                    <input type="number" class="form-control" name="mrpprice" id="mrpprice"
+                                    <input name="orignal_price" type="number" class="form-control" " id="mrpprice"
                                          placeholder="MRP" required>
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="spprice">Selling Price</label>
-                                    <input type="number" class="form-control" name="sp" id="spprice"
+                                    <input type="number" class="form-control" name="selling_price" id="spprice"
                                          placeholder="Selling Price" required>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label for="image">Upload Image</label>
+                                    <input 
+                                    type="file" 
+                                    name="image" 
+                                    id="image" >
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label for="textarea">About the book</label>
-                                    <textarea type="text" name="about" id="about" class="form-control" cols="200" rows="4"
+                                    <textarea type="text" name="description" id="about" class="form-control" cols="200" rows="4"
                                      placeholder="Comment about the content of the book"></textarea>
                                 </div>
                             </div>

@@ -5,7 +5,7 @@ const bcrypt=require('bcrypt')
 
 exports.getLogin=(req,res,next)=>{
     // console.log(path.join(__dirname,'..','views','auth','login.html'));
-    res.render('auth/index');
+    res.render('auth/index',{prods:[]});
 }
 
 

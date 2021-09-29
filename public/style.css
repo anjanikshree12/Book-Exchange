@@ -41,5 +41,8 @@ body{
 background: whitesmoke;
 }
 .nav2{
-    margin-top: 10vh;
+    margin-top:9vh;
+}
+.loggedinbooks{
+    margin-top: 20vh;
 }

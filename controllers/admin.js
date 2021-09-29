@@ -20,6 +20,8 @@ exports.postAddBook=(req,res,next)=>{
     const authorName=req.body.author;
     const image=req.file;
     const imageUrl=image.path;
+    const description=req.body.description;
+    const condition=req.body.condition;
     // console.log();
     console.log(image);
     const user_id=req.user.id;
@@ -51,7 +53,7 @@ exports.postAddBook=(req,res,next)=>{
     .then(aid=>{
                 console.log("final"+aid);
                 // console.log(req.body);
-                const book=new Book(title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl);
+                const book=new Book(title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl,description,condition);
                 console.log(book);
                 book.addBook()
                 .then(result=>{
