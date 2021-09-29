@@ -64,6 +64,7 @@ const orderItemsTable="CREATE TABLE IF NOT EXISTS `order_items`("
         try {
     
             await db.execute(user_table);
+            console.log('user table created');
             await db.execute(author_table);
             await db.execute(bookTable);
             await db.execute(cartTable);

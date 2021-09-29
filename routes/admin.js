@@ -14,4 +14,6 @@ router.get('/myBooks',isAuth,adminController.getMyBook);
 router.post('/deleteBook',isAuth,adminController.deleteBook);
 
 router.get('/userDetails/:id',isAuth,adminController.getUserDetails)
+
+router.get('/wishlist',isAuth,adminController.getWishlist)
 module.exports=router

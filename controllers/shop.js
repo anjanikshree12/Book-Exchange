@@ -150,7 +150,7 @@ exports.getCart=(req,res,next)=>{
         }
         // console.log(bookIds);
         if(bookIds.length==0){
-            return res.render('shop/cart',{
+            return res.render('shop/cart2',{
                 prods:[],
                 path:'/cart',
                 cost:0,
@@ -295,8 +295,8 @@ exports.getOrders=(req,res,next)=>{
             // console.log(curdate);
         }
         console.log(orders)
-        res.render('shop/orders',{
-            
+        res.render('shop/myorders',{
+            path:'/myorders',
             orders:orders
         })
         console.log(orders);
