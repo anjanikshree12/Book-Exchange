@@ -10,19 +10,19 @@
           <a class="nav-link" href="/"><span class="fa fa-home"></span> Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="cart.html"><span class="fa fa-shopping-cart"></span> Cart </a>
+            <a class="nav-link" href="/cart"><span class="fa fa-shopping-cart"></span> Cart </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="wishlist.html"><span class="fa fa-heart"></span> Wishlist </a>
+            <a class="nav-link" href="/wishlist"><span class="fa fa-heart"></span> Wishlist </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/addBook"><span class="fa fa-plus-square"></span> Sell Books </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="mybook.html"><span class="fa fa-book"></span> My Books</a>
+            <a class="nav-link" href="/mybooks"><span class="fa fa-book"></span> My Books</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="Myorders.html"><span class="fa fa-shopping-bag"></span> My Orders</a>
+          <a class="nav-link" href="/showOrders"><span class="fa fa-shopping-bag"></span> My Orders</a>
       </li>
         <li class="nav-item">
           <form action="/logout" method="post">
@@ -38,8 +38,8 @@
     
   </nav>
       <!-- nav 2 -->
-
-      <div class="nav2">
+      <%if(path=='/'){%>
+      <div class="nav2 bg-light fixed-top">
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -93,3 +93,4 @@
           </div>
         </nav>
       </div>
+      <%}%>

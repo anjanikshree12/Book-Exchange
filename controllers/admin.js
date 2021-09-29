@@ -5,7 +5,9 @@ const User = require('../models/user');
 
 exports.getAddBook=(req,res,next)=>{
     // console.log(req.user.id);
-    res.render('admin/uploadbooks');
+    res.render('admin/uploadbooks',{
+        path:'/addBook'
+    });
 }
 
 exports.postAddBook=(req,res,next)=>{
@@ -74,8 +76,9 @@ exports.getMyBook=(req,res,next)=>{
     Book.getBookByUserId(req.user.id)
     .then(books=>{
         console.log(books[0]);
-        res.render('admin/myBook',{
-            prods:books[0]
+        res.render('admin/myBook2',{
+            prods:books[0],
+            path:'/myBooks'
         })
     })
     .catch(err=>{
@@ -106,3 +109,8 @@ exports.getUserDetails=(req,res,next)=>{
     })
 }
 
+exports.getWishlist=(req,res,next)=>{
+    res.render('admin/wishlist',{
+        path:'/wishlist'
+    })
+}
