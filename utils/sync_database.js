@@ -31,6 +31,8 @@ const bookTable="CREATE TABLE IF NOT EXISTS `books`("
     +'`language` VARCHAR(30) NOT NULL, '
     +'`genre` VARCHAR (30) NOT NULL, '
     +'`imageUrl` VARCHAR(255) NOT NULL, '
+    +'`description` VARCHAR(255) NOT NULL, '
+    +'`bcondition` VARCHAR(50) NOT NULL, '
     +'`available` BOOL DEFAULT 1, ' 
     +'FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE CASCADE, '
     +"FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE);"

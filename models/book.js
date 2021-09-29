@@ -2,7 +2,7 @@ const db=require('../utils/database');
 
 
 class Book{
-    constructor(title,orignal_price,selling_price,user_id,genre,language,author_id,imageUrl){
+    constructor(title,orignal_price,selling_price,user_id,genre,language,author_id,imageUrl,description,condition){
         this.title=title;
         this.orignal_price=orignal_price;
         this.selling_price=selling_price;
@@ -10,12 +10,14 @@ class Book{
         this.language=language;
         this.user_id=user_id;
         this.author_id=author_id;
-        this.imageUrl=imageUrl
+        this.imageUrl=imageUrl;
+        this.description=description;
+        this.condition=condition;
     }
 
     addBook(){
-        const command="INSERT INTO BOOKS(title,orignal_price,selling_price,genre,language,author_id,user_id,imageUrl) VALUES(?,?,?,?,?,?,?,?)";
-        return db.execute(command,[this.title,this.orignal_price,this.selling_price,this.genre,this.language,this.author_id,this.user_id,this.imageUrl]);
+        const command="INSERT INTO BOOKS(title,orignal_price,selling_price,genre,language,author_id,user_id,imageUrl,description,bcondition) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        return db.query(command,[this.title,this.orignal_price,this.selling_price,this.genre,this.language,this.author_id,this.user_id,this.imageUrl,this.description,this.condition]);
     }
 
     static getBookByAuthor(){
@@ -95,7 +97,7 @@ class Book{
     }
     
     static getAllBooks(orderBy){
-        const command="SELECT * FROM BOOKS WHERE AVAILABLE=1";
+        const command="SELECT * FROM BOOKS JOIN AUTHORS ON books.author_id=authorS.id  WHERE AVAILABLE=1 ";
         if(orderBy=='true'){
             command+=' ORDER BY orignal_price';
         }
