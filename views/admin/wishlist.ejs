@@ -1,27 +1,105 @@
 <%- include('../includes/header.ejs') %>
-<body>
-    <%- include('../includes/loggedinnav.ejs') %>
 
-    <!-- books -->
+    <body>
+        <%- include('../includes/loggedinnav.ejs') %>
 
-    <div class="container">
-        <div class="row mt-4">
-            <div class="col text-center">
-                <p class="lead">WishList</p>
-            </div>
-        </div>
+            <!-- books -->
 
-        <div class="container-fluid mt-4">
-            <div class="row-footer text-center">
-                <div class="col-12 col-md-12">
-                    <p class="lead muted">© Boook Store 2021</p>
+            <div class="wishlist">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <p class="lead">My Wishlist</p>
+                        </div>
+                    </div>
+                    <!-- first row -->
+                    <div class="card-group mt-4 border rounded" style="background-color: #e3f2fd;">
+                        <div class="col-12 col-md-12 mt-4 mb-4">
+                            <div class="row">
+                                <div class="col-5 col-md-3">
+                                    <img src="/images/2021-09-02T15-19-56.869Z12im.png" alt="pic" style="width: 50%;">
+                                </div>
+                                <div class="col-5 col-md-7">
+                                    <div class="row mt-4">
+                                        <div class="col">
+                                            <h4>12 RULES OF LIFE</h4>
+                                            <small>
+                                                <p>30+ Copies Sold</p>
+                                            </small>
+                                            <h4>&#8377 999 <strike>&#8377 2999</strike> <small>66% off</small> </h4>
+                                            <button type="button" class="mt-4 btn btn-lg border-success"><span
+                                                    class="fa fa-cart-plus"></span></button>
+                                            <button type="button" class="mt-4 btn btn-lg border-success"><span
+                                                    class="fa fa-trash"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- second row -->
+                    <div class="card-group mt-4 border rounded" style="background-color: #e3f2fd;">
+                        <div class="col-12 col-md-12 mt-4 mb-4">
+                            <div class="row">
+                                <div class="col-5 col-md-3">
+                                    <img src="/images/2021-09-02T15-19-56.869Z12im.png" alt="pic" style="width: 50%;">
+                                </div>
+                                <div class="col-5 col-md-7">
+                                    <div class="row mt-4">
+                                        <div class="col">
+                                            <h4>12 RULES OF LIFE</h4>
+                                            <small>
+                                                <p>30+ Copies Sold</p>
+                                            </small>
+                                            <h4>&#8377 999 <strike>&#8377 2999</strike> <small>66% off</small> </h4>
+                                            <button type="button" class="mt-4 btn btn-lg border-success"><span
+                                                    class="fa fa-cart-plus"></span></button>
+                                            <button type="button" class="mt-4 btn btn-lg border-success"><span
+                                                    class="fa fa-trash"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- third row -->
+                    <div class="card-group mt-4 border rounded" style="background-color: #e3f2fd;">
+                        <div class="col-12 col-md-12 mt-4 mb-4">
+                            <div class="row">
+                                <div class="col-5 col-md-3">
+                                    <img src="/images/2021-09-02T15-19-56.869Z12im.png" alt="pic" style="width: 50%;">
+                                </div>
+                                <div class="col-5 col-md-7">
+                                    <div class="row mt-4">
+                                        <div class="col">
+                                            <h4>12 RULES OF LIFE</h4>
+                                            <small>
+                                                <p>30+ Copies Sold</p>
+                                            </small>
+                                            <h4>&#8377 999 <strike>&#8377 2999</strike> <small>66% off</small> </h4>
+                                            <button type="button" class="mt-4 btn btn-lg border-success"><span
+                                                    class="fa fa-cart-plus"></span></button>
+                                            <button type="button" class="mt-4 btn btn-lg border-success"><span
+                                                    class="fa fa-trash"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- footer -->
+                    <div class="container-fluid mt-4">
+                        <div class="row-footer text-center">
+                            <div class="col-12 col-md-12">
+                                <p class="lead muted">© Boook Store 2021</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-        </div>
-    </div>
 
+            <%- include('../includes/footer.ejs') %>
+    </body>
 
-    <%- include('../includes/footer.ejs') %>
-</body>
-
-</html>
+    </html>
