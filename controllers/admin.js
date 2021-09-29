@@ -5,7 +5,7 @@ const User = require('../models/user');
 
 exports.getAddBook=(req,res,next)=>{
     // console.log(req.user.id);
-    res.render('admin/addBook');
+    res.render('admin/uploadbooks');
 }
 
 exports.postAddBook=(req,res,next)=>{

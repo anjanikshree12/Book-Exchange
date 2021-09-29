@@ -22,11 +22,13 @@
             <a class="nav-link" href="mybook.html"><span class="fa fa-book"></span> My Books</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="Myorders.html"><span class="fa fa-shopping-bag"></span> My Orders</a>
+          <button class="nav-link" href="Myorders.html"><span class="fa fa-shopping-bag"></span> My Orders</a>
       </li>
         <li class="nav-item">
-            <a class="nav-link" href="index.html"><span class="fa fa-sign-out"></span> Log Out </a>
-        </li>
+          <form action="/logout" method="post">
+            <button class="nav-link"  type="submit"><span class="fa fa-sign-out"></span> Log Out </a>
+          </form>
+          </li>
       </ul>
       <form class="form-inline my-4 my-lg-2">
         <input class="form-control mr-sm-4" type="search" placeholder="Search Books..." aria-label="Search">

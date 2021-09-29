@@ -1,16 +1,21 @@
 const db=require('../utils/database');
 
 class User{
-    constructor(email,name,password,city){
+    constructor(email,firstName,lastName,hashedPassword,city,state,address,pincode,mobileNumber){
         this.email=email;
-        this.name=name;
-        this.password=password;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.password=hashedPassword;
         this.city=city;
+        this.address=address;
+        this.state=state;
+        this.pincode=pincode;
+        this.mobileNumber=mobileNumber;
     }
 
     addUser(){
-        const command="INSERT INTO users(email,name,password,city) VALUES(?,?,?,?)";
-        return db.execute(command,[this.email,this.name,this.password,this.city])
+        const command="INSERT INTO users(email,firstName,lastName,password,city,state,address,pincode,mobileNumber) VALUES(?,?,?,?,?,?,?,?,?)";
+        return db.execute(command,[this.email,this.firstName,this.lastName,this.password,this.city,this.state,this.address,this.pincode,this.mobileNumber])
     }
     static getUserByEmail(email){
         return db.execute('SELECT *FROM users WHERE email=?',[email]);

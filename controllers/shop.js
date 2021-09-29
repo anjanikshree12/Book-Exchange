@@ -10,7 +10,7 @@ exports.getHomePage=(req,res,next)=>{
     const orderBy=req.params.orderBy;
     Book.getAllBooks(orderBy)
     .then(result=>{
-        res.render('shop/bookCity',{
+        res.render('auth/loggedin',{
             prods:result[0],
             path:'/'
         })
