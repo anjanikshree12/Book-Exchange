@@ -5,127 +5,172 @@
 
             <!-- books -->
             <%if(prods.length>0){%>
-            <div class="cart">
+                <div class="cart">
 
-                <div class="container">
-                    <div class="row mt-4">
-                        <div class="col text-center">
-                            <p class="lead">Cart</p>
+                    <div class="container">
+                        <div class="row mt-4">
+                            <div class="col text-center">
+                                <p class="lead">Cart</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <!-- first section of row -->
-                        <div class="col-12 col-md-8">
-                            <div class="card ">
-                                <div class="card-header"
-                                    style="background:white;">                                                                                   
-                                    <div class="row align-items-center">
-                                        <div class="col-5 col-md-5"><h5>Items</h5></div>
-                                        <div class="col-2 col-md-2"> <h5>Deliver to</h5></div>
-                                        <div class="col-5 col-md-5"><input type="email" class="form-control" placeholder="Enter Address"></div>
+                        <div class="row">
+                            <!-- first section of row -->
+                            <div class="col-12 col-md-8">
+                                <div class="card ">
+                                    <div class="card-header" style="background:white;">
+                                        <div class="row align-items-center">
+                                            <div class="col-12 col-md-6">
+                                                <h5>Items</h5>
+                                            </div>
+                                            <div class="col-6 col-md-2"><span class="fa fa-truck"></span> Deliver to
+                                            </div>
+                                            <div class="col-6 col-md-4">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-info dropdown-toggle" type="button"
+                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="true">
+                                                        DefaultAddress-570008
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <p
+                                                            class="small d-flex justify-content-center align-items-center">
+                                                            Saved Addresses: </p>
+                                                        <a class="dropdown-item" href="#">Saved Address 1 </a>
+                                                        <a class="dropdown-item" href="#">Saved Address 2 </a>
+                                                        <a class="dropdown-item" href="#">Saved Address 3 </a>
+                                                        <a class="dropdown-item" href="#">
+                                                            <div class="row">
+                                                                <div class="col-9 col-md-9">
+                                                                    <input type="number" class="form-control"
+                                                                        placeholder="Pincode">
+                                                                </div>
+                                                                <div class="col-3 col-md-3">
+                                                                    <span class="fa fa-search"></span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <% for (let product of prods) { %>
-                                    <!-- cart item 1 -->
-                                    <div class="row mt-4 border-bottom">
-                                        <div class="col-3 col-md-3">
-                                            <img src="/<%= product.imageUrl %>" alt="pic">
-                                        </div>
-                                        <div class="col-5 col-md-5">
-                                            <h4><%= product.title %></h4>
-                                            <p><%=product.firstName%> <%=product.lastName%></p>
-                                            <p class="lead">&#8377 <%= product.selling_price %> <strike>&#8377 <%= product.orignal_price %>  </strike> <small> <%=product.sale%> off
-                                                </small> </p>
-                                                <form action="/removeFromCart" method="POST">
-                                                    <input type="hidden" name="bookId"   value="<%=product.id%>">
-                                            <button type="submit" class="mt-4 border rounded bg-danger text-white"><span
-                                                    class="fa fa-trash"></span> Remove from cart </button>
-                                            </form>
-                                        </div>
-                                        <div class="col-4 col-md-4">
-                                            <h6 class="lead small">Delivery by SUN October 3 | FREE </h6>
-                                            <small>
-                                                <p>10 days replacement policy!</p>
-                                            </small>
-                                        </div>
+                                    <div class="card-body">
+                                        <% for (let product of prods) { %>
+                                            <!-- cart item 1 -->
+                                            <div class="row mt-4 border-bottom">
+                                                <div class="col-3 col-md-3">
+                                                    <img src="/<%= product.imageUrl %>" alt="pic">
+                                                </div>
+                                                <div class="col-5 col-md-5">
+                                                    <h4>
+                                                        <%= product.title %>
+                                                    </h4>
+                                                    <p>
+                                                        <%=product.firstName%>
+                                                            <%=product.lastName%>
+                                                    </p>
+                                                    <p class="lead">&#8377 <%= product.selling_price %> <strike>&#8377
+                                                                <%= product.orignal_price %>
+                                                            </strike> <small>
+                                                                <%=product.sale%>% off
+                                                            </small> </p>
+                                                    <form action="/removeFromCart" method="POST">
+                                                        <input type="hidden" name="bookId" value="<%=product.id%>">
+                                                        <button type="submit"
+                                                            class="mt-3 border rounded bg-danger text-white"><span
+                                                                class="fa fa-trash"></span> Remove from cart </button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-4 col-md-4">
+                                                    <h6 class="lead small">Delivery by SUN October 3 | FREE </h6>
+                                                    <small>
+                                                        <p>10 days replacement policy!</p>
+                                                    </small>
+                                                </div>
 
+                                            </div>
+                                            <% } %>
                                     </div>
-                                    <% } %>
-                                </div>
-                                <!-- place order section -->
-                                <div class="card-footer" style="background: white;">
-                                    <div class="row">
-                                        <div class="col-12 col-md-12  d-flex justify-content-end">
-                                            <button type="button"
-                                                class=" border rounded bg-success m-2 btn-lg text-white">PLACE
-                                                ORDER</button>
+                                    <!-- place order section -->
+                                    <div class="card-footer" style="background: white;">
+                                        <div class="row">
+                                            <div class="col-12 col-md-12  d-flex justify-content-end">
+                                                <button type="button"
+                                                    class=" border rounded bg-success m-2 btn-lg text-white">PLACE
+                                                    ORDER</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- second section of row -->
+                            <!-- second section of row -->
                             <!-- final price section -->
-                        <div class="col-12 col-md-4">
-                            <div class="card">
-                                <div class="card-header" style="background: white;">
-                                    <h5 class="text-center">Final Price</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row m-1">
-                                        <div class="col-8 col-md-8">
-                                            <h6>Price(3 item) </h6>
-                                            <h6>Discount</h6>
-                                            <h6>Delivery Charges</h6>
+                            <div class="col-12 col-md-4">
+                                <div class="card">
+                                    <div class="card-header" style="background: white;">
+                                        <h5 class="text-center">Final Price</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row m-1">
+                                            <div class="col-7 col-md-7">
+                                                <h6>Price(3 item) </h6>
+                                                <h6>Discount</h6>
+                                                <h6>Delivery Charges</h6>
+                                            </div>
+                                            <div class="col-5 col-md-5">
+                                                <h6>&#8377 <%=orignal_cost%>
+                                                </h6>
+                                                <h6>&#8377 -<%=orignal_cost-selling_cost%>
+                                                </h6>
+                                                <h6>FREE</h6>
+                                            </div>
                                         </div>
-                                        <div class="col-4 col-md-4">
-                                            <h6>&#8377 <%=orignal_cost%> </h6>
-                                            <h6>&#8377 -<%=selling_cost%></h6>
-                                            <h6>FREE</h6>
+                                    </div>
+                                    <div class="card-footer" style="background: white;">
+                                        <div class="row mt-4 m-1">
+                                            <div class="col-7 col-md-7">
+                                                <h6>Total Amount </h6>
+                                            </div>
+                                            <div class="col-5 col-md-5">
+                                                <h6>&#8377 <%=selling_cost%>/-</h6>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4 m-1">
+                                            <div class="col-12 col-md-12">
+                                                <h6>You'll save &#8377 <%=orignal_cost-selling_cost%> on this order!
+                                                </h6>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-footer" style="background: white;">
-                                    <div class="row mt-4 m-1">
-                                        <div class="col-8 col-md-8">
-                                            <h6>Total Amount </h6>
-                                        </div>
-                                        <div class="col-4 col-md-4">
-                                            <h6>&#8377 <%=selling_cost%></h6>
-                                        </div>
+                                <div class="row mt-4">
+                                    <div class="col">
+                                        <h6>Safe and Secure Payments, Razor Pay gateway is used for 100% protection from
+                                            fraud!</h6>
                                     </div>
-                                    <div class="row mt-4 m-1">
-                                        <div class="col-12 col-md-12">
-                                            <h6>You'll save <%=saving%> on this order!</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-4">
-                                <div class="col">
-                                    <h6>Safe and Secure Payments, Razor Pay gateway is used for 100% protection from fraud!</h6>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
-                    <div class="container-fluid mt-4">
-                        <div class="row-footer text-center">
-                            <div class="col-12 col-md-12">
-                                <p class="lead muted">© Boook Store 2021</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                <%}else{%>
+                    <div>
+                        <p>Wishlist empty</p>
+                    </div>
 
-            </div>
-            <%}else{%>
-                <div><p>Wishlist empty</p></div>
-                
-                <%}%>
-            <%- include('../includes/footer.ejs') %>
+                    <%}%>
+                        <%- include('../includes/footer.ejs') %>
+                            <script>
+                                $('.dropdown-item').on('click', function () {
+                                    var btnObj = $(this).parent().siblings('button');
+                                    $(btnObj).text($(this).text());
+                                    $(btnObj).val($(this).text());
+                                });
+
+                            </script>
     </body>
 
     </html>
