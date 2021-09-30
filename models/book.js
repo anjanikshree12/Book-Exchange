@@ -89,14 +89,14 @@ class Book{
     }
 
     static getBookInArray(bookIds,orderBy){
-        let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books WHERE id IN (?) ";
+        let command="SELECT *,books.id as id,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books JOIN users ON user_id=users.id WHERE books.id IN (?) ";
         if(orderBy=='true')
         command+="ORDER BY selling_price;";
         return db.query(command,[bookIds]);
     }
 
     static getTotalPrice(bookIds){
-        const command="SELECT SUM(orignal_price) AS cost FROM books WHERE id IN (?);"
+        const command="SELECT SUM(selling_price) AS selling_cost,SUM(orignal_price) AS orignal_cost FROM books WHERE id IN (?);"
         return db.query(command,[bookIds]);
     }
 

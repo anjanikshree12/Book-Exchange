@@ -4,6 +4,7 @@
         <%- include('../includes/loggedinnav.ejs') %>
 
             <!-- books -->
+            <%if(prods.length>0){%>
             <div class="cart">
 
                 <div class="container">
@@ -26,18 +27,22 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <% for (let product of prods) { %>
                                     <!-- cart item 1 -->
                                     <div class="row mt-4 border-bottom">
                                         <div class="col-3 col-md-3">
-                                            <img src="/images/2021-09-02T15-25-22.746Z12im.png" alt="pic">
+                                            <img src="/<%= product.imageUrl %>" alt="pic">
                                         </div>
                                         <div class="col-5 col-md-5">
-                                            <h4>Item Name</h4>
-                                            <p>Seller Name</p>
-                                            <p class="lead">&#8377 2999 <strike>&#8377 3999</strike> <small> 37% off
+                                            <h4><%= product.title %></h4>
+                                            <p><%=product.firstName%> <%=product.lastName%></p>
+                                            <p class="lead">&#8377 <%= product.selling_price %> <strike>&#8377 <%= product.orignal_price %>  </strike> <small> <%=product.sale%> off
                                                 </small> </p>
-                                            <button type="button" class="mt-4 border rounded bg-danger text-white"><span
+                                                <form action="/removeFromCart" method="POST">
+                                                    <input type="hidden" name="bookId"   value="<%=product.id%>">
+                                            <button type="submit" class="mt-4 border rounded bg-danger text-white"><span
                                                     class="fa fa-trash"></span> Remove from cart </button>
+                                            </form>
                                         </div>
                                         <div class="col-4 col-md-4">
                                             <h6 class="lead small">Delivery by SUN October 3 | FREE </h6>
@@ -47,50 +52,7 @@
                                         </div>
 
                                     </div>
-                                    <!-- cart item 2 -->
-                                    <div class="row  mt-4 border-bottom">
-                                        <div class="col-3 col-md-3">
-                                            <img src="/images/2021-09-02T15-25-22.746Z12im.png" alt="pic">
-                                        </div>
-                                        <div class="col-5 col-md-5">
-                                            <h4>Item Name</h4>
-                                            <p>Seller Name</p>
-                                            <p class="lead">&#8377 2999 <strike>&#8377 3999</strike> <small> 37% off
-                                                </small> </p>
-                                            <button type="button"
-                                                class=" mt-4 border rounded bg-danger text-white"><span
-                                                    class="fa fa-trash"></span> Remove from cart </button>
-                                        </div>
-                                        <div class="col-4 col-md-4">
-                                            <h6 class="lead small">Delivery by SUN October 3 | FREE </h6>
-                                            <small>
-                                                <p>10 days replacement policy!</p>
-                                            </small>
-                                        </div>
-
-                                    </div>
-                                    <!-- cart item 3 -->
-                                    <div class="row mt-4 border-bottom">
-                                        <div class="col-3 col-md-3">
-                                            <img src="/images/2021-09-02T15-25-22.746Z12im.png" alt="pic">
-                                        </div>
-                                        <div class="col-5 col-md-5">
-                                            <h4>Item Name</h4>
-                                            <p>Seller Name</p>
-                                            <p class="lead">&#8377 2999 <strike>&#8377 3999</strike> <small> 37% off
-                                                </small> </p>
-                                            <button type="button" class="mt-4 border rounded bg-danger text-white"><span
-                                                    class="fa fa-trash"></span> Remove from cart </button>
-                                        </div>
-                                        <div class="col-4 col-md-4">
-                                            <h6 class="lead small">Delivery by SUN October 3 | FREE </h6>
-                                            <small>
-                                                <p>10 days replacement policy!</p>
-                                            </small>
-                                        </div>
-
-                                    </div>
-
+                                    <% } %>
                                 </div>
                                 <!-- place order section -->
                                 <div class="card-footer" style="background: white;">
@@ -119,8 +81,8 @@
                                             <h6>Delivery Charges</h6>
                                         </div>
                                         <div class="col-4 col-md-4">
-                                            <h6>&#8377 6997</h6>
-                                            <h6>&#8377 -6997</h6>
+                                            <h6>&#8377 <%=orignal_cost%> </h6>
+                                            <h6>&#8377 -<%=selling_cost%></h6>
                                             <h6>FREE</h6>
                                         </div>
                                     </div>
@@ -131,12 +93,12 @@
                                             <h6>Total Amount </h6>
                                         </div>
                                         <div class="col-4 col-md-4">
-                                            <h6>&#8377 6997</h6>
+                                            <h6>&#8377 <%=selling_cost%></h6>
                                         </div>
                                     </div>
                                     <div class="row mt-4 m-1">
                                         <div class="col-12 col-md-12">
-                                            <h6>You'll save (MRP-SP) on this order!</h6>
+                                            <h6>You'll save <%=saving%> on this order!</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +121,10 @@
                 </div>
 
             </div>
-
+            <%}else{%>
+                <div><p>Wishlist empty</p></div>
+                
+                <%}%>
             <%- include('../includes/footer.ejs') %>
     </body>
 

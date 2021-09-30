@@ -262,11 +262,13 @@ exports.getCart=(req,res,next)=>{
             Book.getTotalPrice(bookIds)
             .then(result1=>{
                 console.log(bookIds);
-                // console.log(req.body);
+                // console.log(result[0]);
                 return res.render('shop/cart2',{
                     prods:result[0],
                     path:'/cart',
-                    cost:result1[0][0].cost,
+                    orignal_cost:result1[0][0].orignal_cost,
+                    selling_cost:result1[0][0].selling_cost,
+                    saving:result1[0][0].orignal_cost-result1[0][0].selling_cost,
                     books:bookIds
                 })
             })
