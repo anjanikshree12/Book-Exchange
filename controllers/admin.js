@@ -111,8 +111,3 @@ exports.getUserDetails=(req,res,next)=>{
     })
 }
 
-exports.getWishlist=(req,res,next)=>{
-    res.render('admin/wishlist',{
-        path:'/wishlist'
-    })
-}

@@ -56,15 +56,25 @@
                                                 
                                                 <%if(userId!=product.user_id){%>
                                                     <div class="row">
+                                                        <form action="/addToCart" method="post">
                                                         <div class="col-6 col-md-6">
-                                                            <a href="#" class="btn btn-lg border-success"><span
-                                                                    class="fa fa-cart-plus"></span></a>
+                                                            
+                                                                <input type="hidden" value="<%= product.id %>" name="bookId">
+                                                                <input type="hidden" value="<%=path%>" name="path">
+                                                                <button type='submit' ><a class="btn btn-lg border-success"><span
+                                                                    class="fa fa-cart-plus"></span></a></button>                
                                                         </div>
+                                                    </form>
+                                                    <form action="/addToWishlist" method="post">
                                                         <div class="col-6 col-md-6">
-                                                            <a href="#" class="btn btn-lg border-success"><span
-                                                                    class="fa fa-heart"></span></a>
+                                                            <input type="hidden" value="<%= product.id %>" name="bookId">
+                                                                <input type="hidden" value="<%=path%>" name="path">
+                                                            <button type="submit"><a class="btn btn-lg border-success"><span
+                                                                class="fa fa-heart"></span></a></button>
                                                         </div>
+                                                    </form>
                                                     </div>
+                                                
                                                     <%}else if(path=='/mybooks'){%>
                                                         <form action="/deleteBook" method="POST">
                                                             <input type="hidden" name="id"   value="<%=product.id%>">

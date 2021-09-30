@@ -44,6 +44,13 @@ const cartTable="CREATE TABLE IF NOT EXISTS `cart`("
     +"FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE, "
     +"FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE);"
 
+const wishlistTable="CREATE TABLE IF NOT EXISTS `wishlist`("
+    +"`id` INT PRIMARY KEY AUTO_INCREMENT, "
+    +"`book_id` INT, "
+    +"`user_id` INT, "
+    +"FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE, "
+    +"FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE);"
+
 
 
 const orderTable="CREATE TABLE IF NOT EXISTS `orders`("
@@ -70,6 +77,7 @@ const orderItemsTable="CREATE TABLE IF NOT EXISTS `order_items`("
             await db.execute(author_table);
             await db.execute(bookTable);
             await db.execute(cartTable);
+            await db.execute(wishlistTable);
             await db.execute(orderTable);
             await db.execute(orderItemsTable);
         } catch (err) {
