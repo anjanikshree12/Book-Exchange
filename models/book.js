@@ -89,7 +89,7 @@ class Book{
     }
 
     static getBookInArray(bookIds,orderBy){
-        let command="SELECT * FROM books WHERE id IN (?) ";
+        let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books WHERE id IN (?) ";
         if(orderBy=='true')
         command+="ORDER BY selling_price;";
         return db.query(command,[bookIds]);
@@ -106,7 +106,7 @@ class Book{
     }
     
     static getAllBooks(orderBy){
-        const command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM BOOKS JOIN AUTHORS ON books.author_id=authorS.id  WHERE AVAILABLE=1 ";
+        const command="SELECT *,books.id as id,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM BOOKS JOIN AUTHORS ON books.author_id=authorS.id  WHERE AVAILABLE=1 ";
         if(orderBy=='true'){
             command+=' ORDER BY orignal_price';
         }

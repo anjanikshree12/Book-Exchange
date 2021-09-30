@@ -4,8 +4,10 @@ const Book=require('../models/book')
 const Cart=require('../models/cart')
 const Order=require('../models/orders');
 const OrderItem=require('../models/orderItem');
+const Wishlist = require('../models/wishlist');
 
 exports.getHomePage=(req,res,next)=>{
+    console.log(req.user);
     // console.log(req.session.user);
     const orderBy=req.params.orderBy;
     Book.getAllBooks(orderBy)
@@ -116,14 +118,100 @@ exports.getBooksByLanguage=(req,res,next)=>{
     })
 }
 
-exports.addToCart=(req,res,next)=>{
-    // console.log(req.body);
+
+exports.addToWishlist=(req,res,next)=>{
+    console.log(req.body);
     const bookId=req.body.bookId;
     const userId=req.user.id
     const path=req.body.path;
     Book.getOwner(bookId)
     .then(result=>{
+        console.log(result[0]);
+        const owner=result[0][0].user_id;
+        if(owner==userId){
+            return res.redirect(path)
+        }
+        const wishlist= new Wishlist(bookId,userId,owner);
+        console.log(wishlist);
+        return wishlist.checkIfExists()
+        .then(result=>{
+            if(result[0].length!=0){
+                return res.redirect(path);
+            }else{
+                return wishlist.addToWishlist()
+                .then(result=>{
+                    console.log('added to wishlist');
+                    res.redirect('/wishlist');
+                })
+            }
+            console.log(result);
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+exports.getWishlist=(req,res,next)=>{
+    // console.log(req.user);
+    const userId=req.user.id;
+    const orderBy=req.query.orderBy;
+    console.log(orderBy);
+    Wishlist.getWishlist(userId)
+    .then(result=>{
         // console.log(result[0]);
+        let bookIds=[];
+        for(let i=0;i<result[0].length;i++){
+            bookIds.push(result[0][i].book_id);
+        }
+        // console.log(bookIds);
+        if(bookIds.length==0){
+            return res.render('admin/wishlist',{
+                prods:[],
+                path:'/wishlist',
+                cost:0,
+                books:[]
+            })
+        }else{
+        Book.getBookInArray(bookIds,orderBy)
+        .then(result=>{
+            Book.getTotalPrice(bookIds)
+            .then(result1=>{
+                console.log(bookIds);
+                console.log(result[0]);
+                // console.log(req.body);
+                return res.render('admin/wishlist',{
+                    prods:result[0],
+                    path:'/wishlist',
+                    cost:result1[0][0].cost,
+                    books:bookIds
+                })
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+            // console.log(result[0]);
+            
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+    })
+
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+exports.addToCart=(req,res,next)=>{
+    console.log(req.body);
+    const bookId=req.body.bookId;
+    const userId=req.user.id
+    const path=req.body.path;
+    Book.getOwner(bookId)
+    .then(result=>{
+        console.log(result[0]);
         const owner=result[0][0].user_id;
         if(owner==userId){
             return res.redirect(path)
@@ -175,7 +263,7 @@ exports.getCart=(req,res,next)=>{
             .then(result1=>{
                 console.log(bookIds);
                 // console.log(req.body);
-                return res.render('shop/cart',{
+                return res.render('shop/cart2',{
                     prods:result[0],
                     path:'/cart',
                     cost:result1[0][0].cost,
@@ -207,6 +295,18 @@ exports.removeFromCart=(req,res,next)=>{
     .then(result=>{
         res.redirect('/cart');
         console.log('removed From Cart');
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+exports.removeFromWishlist=(req,res,next)=>{
+    const bookId=req.body.bookId;
+    const userId=req.user.id;
+    Wishlist.removeFromWishlist(bookId,userId)
+    .then(result=>{
+        res.redirect('/wishlist');
+        console.log('removed From wishlist');
     })
     .catch(err=>{
         console.log(err);
