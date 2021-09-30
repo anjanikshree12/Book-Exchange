@@ -60,7 +60,7 @@
                                                         <%}%>
 
                                                             <%if(userId!=product.user_id){%>
-                                                                <div class="row">
+                                                                <div class="row d-flex justify-content-around">
                                                                     <form action="/addToCart" method="post">
                                                                         <div class="col-6 col-md-6">
 
@@ -68,9 +68,9 @@
                                                                                 value="<%= product.id %>" name="bookId">
                                                                             <input type="hidden" value="<%=path%>"
                                                                                 name="path">
-                                                                            <button type='submit'><a
-                                                                                    class="btn btn-lg border-success"><span
-                                                                                        class="fa fa-cart-plus"></span></a></button>
+                                                                            <button type='submit' class="btn btn-lg border-success">
+                                                                                    <span
+                                                                                        class="fa fa-cart-plus"></span></button>
                                                                         </div>
                                                                     </form>
                                                                     <form action="/addToWishlist" method="post">
@@ -79,9 +79,8 @@
                                                                                 value="<%= product.id %>" name="bookId">
                                                                             <input type="hidden" value="<%=path%>"
                                                                                 name="path">
-                                                                            <button type="submit"><a
-                                                                                    class="btn btn-lg border-success"><span
-                                                                                        class="fa fa-heart"></span></a></button>
+                                                                            <button type="submit" class="btn btn-lg border-success">
+                                                                                    <span class="fa fa-heart"></span></button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
