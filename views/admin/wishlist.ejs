@@ -13,52 +13,59 @@
                         </div>
                     </div>
                     <!-- first row -->
-                    <% if (prods.length > 0) { %>
+                    <% if (prods.length> 0) { %>
                         <% for (let product of prods) { %>
-                    <div class="card-group mt-4 border rounded" style="background-color: #e3f2fd;">
-                        <div class="col-12 col-md-12 mt-4 mb-4">
-                            <div class="row">
-                                <div class="col-5 col-md-3">
-                                    <img src="/<%= product.imageUrl %>"  alt="pic" style="width: 50%;">
-                                </div>
-                                <div class="col-5 col-md-7">
-                                    <div class="row mt-4">
-                                        <div class="col">
-                                            <h4><%= product.title %></h4>
-                                            <h4>&#8377 <%= product.orignal_price %> <strike>&#8377  <%= product.selling_price %></strike> <small><%=product.sale%> off</small> </h4>
-                                            <form action="/addToCart" method="post">
-                                                
-                                                    
+                            <div class="card-group mt-4 border rounded" style="background-color: #e3f2fd;">
+                                <div class="col-12 col-md-12 mt-4 mb-4">
+                                    <div class="row">
+                                        <div class="col-5 col-md-3">
+                                            <img src="/<%= product.imageUrl %>" alt="pic" style="width: 50%;">
+                                        </div>
+                                        <div class="col-5 col-md-7">
+                                            <div class="row mt-4">
+                                                <div class="col">
+                                                    <h4>
+                                                        <%= product.title %>
+                                                    </h4>
+                                                    <h4>&#8377 <%= product.orignal_price %> <strike>&#8377 <%=
+                                                                    product.selling_price %></strike> <small>
+                                                                <%=product.sale%> off
+                                                            </small> </h4>
+                                                    <form action="/addToCart" method="post">
+
+
                                                         <input type="hidden" value="<%= product.id %>" name="bookId">
                                                         <input type="hidden" value="<%=path%>" name="path">
-                                                        <button type='submit'  class="btn btn-lg border-success"><span
-                                                            class="fa fa-cart-plus"></span></button>                
-                                                </form>
-                                        
-                                            
-                                                    <form action="/removeFromWishlist" method="POST">
-                                                        <input type="hidden" name="bookId"   value="<%=product.id%>">
-                                                        <button type="submit" class="mt-4 btn btn-lg border-success"><span
-                                                            class="fa fa-trash"></span></button>
+                                                        <button type='submit' class="btn btn-lg border-success"><span
+                                                                class="fa fa-cart-plus"></span></button>
                                                     </form>
-                                            
+
+
+                                                    <form action="/removeFromWishlist" method="POST">
+                                                        <input type="hidden" name="bookId" value="<%=product.id%>">
+                                                        <button type="submit"
+                                                            class="mt-4 btn btn-lg border-success"><span
+                                                                class="fa fa-trash"></span></button>
+                                                    </form>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <% } %>
-                    <p>total cost of items in wishlist: <%=cost%></p>
-                    <%}%>
-                    <!-- footer -->
-                    <div class="container-fluid mt-4">
-                        <div class="row-footer text-center">
-                            <div class="col-12 col-md-12">
-                                <p class="lead muted">© Boook Store 2021</p>
-                            </div>
-                        </div>
-                    </div>
+                            <% } %>
+                                <p>total cost of items in wishlist: <%=cost%>
+                                </p>
+                                <%}%>
+                                    <!-- footer -->
+                                    <div class="container-fluid mt-4">
+                                        <div class="row-footer text-center">
+                                            <div class="col-12 col-md-12">
+                                                <p class="lead muted">© Boook Store 2021</p>
+                                            </div>
+                                        </div>
+                                    </div>
                 </div>
 
             </div>
