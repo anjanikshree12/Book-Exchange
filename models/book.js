@@ -38,7 +38,7 @@ class Book{
         return db.execute(command,[cityName,userID]); 
     }
     static getBookByUserId(userId){
-        const command="SELECT books.id,title,selling_price,orignal_price,available,imageUrl FROM users "
+        const command="SELECT books.id,title,selling_price,orignal_price,available,imageUrl,bcondition,user_id FROM users "
         +"JOIN books "
         +"ON users.id=user_id "
         +"WHERE users.id=?;"
@@ -73,6 +73,15 @@ class Book{
         }
         return db.execute(command,[genre]);
     }
+
+    static getBooksbyLanguage(language,orderByPrice,userId){
+        let command="SELECT * FROM books where language=?  AND available=1 ";
+     
+    if(orderByPrice=='true'){
+        command+="ORDER BY orignal_price;"
+    }
+    return db.execute(command,[language]);
+}
 
     static getGenre(){
         let command="SELECT * FROM books GROUP BY genre";

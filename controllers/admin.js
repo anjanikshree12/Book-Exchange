@@ -80,7 +80,7 @@ exports.getMyBook=(req,res,next)=>{
         console.log(books[0]);
         res.render('admin/myBook2',{
             prods:books[0],
-            path:'/myBooks'
+            path:'/mybooks'
         })
     })
     .catch(err=>{

@@ -15,4 +15,5 @@ router.post('/removeFromCart',isAuth,shopController.removeFromCart)
 router.post('/order',isAuth,shopController.postOrder);
 router.get('/showOrders',isAuth,shopController.getOrders);
 router.get('/bookDetails/:id',isAuth,shopController.getBookDetails)
+router.get('/languageBook/:language',isAuth,shopController.getBooksByLanguage)
 module.exports=router
