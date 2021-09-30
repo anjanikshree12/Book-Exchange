@@ -89,7 +89,7 @@ class Book{
     }
 
     static getBookInArray(bookIds,orderBy){
-        let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books WHERE id IN (?) ";
+        let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books JOIN users ON user_id=users.id WHERE books.id IN (?) ";
         if(orderBy=='true')
         command+="ORDER BY selling_price;";
         return db.query(command,[bookIds]);

@@ -34,7 +34,7 @@
                                         </div>
                                         <div class="col-5 col-md-5">
                                             <h4><%= product.title %></h4>
-                                            <p>Seller Name</p>
+                                            <p><%=product.firstName%> <%=product.lastName%></p>
                                             <p class="lead">&#8377 <%= product.selling_price %> <strike>&#8377 <%= product.orignal_price %>  </strike> <small> <%=product.sale%> off
                                                 </small> </p>
                                                 <form action="/removeFromCart" method="POST">
