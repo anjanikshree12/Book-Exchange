@@ -1,95 +1,125 @@
 <%- include('../includes/header.ejs') %>
-<body>
-    <%- include('../includes/loggedinnav.ejs') %>
 
-    <!-- books -->
+    <body>
+        <%- include('../includes/loggedinnav.ejs') %>
 
-    <div class="sellbooks">
-        <div class="container">
-            <div class="row mt-4">
-                <div class="col text-center mt-4">
-                    <p class="lead">Sell Books</p>
-                </div>
-            </div>
-            <div class="row row-content mt-4 d-flex justify-content-center">
-                <div class="col-10 col-md-12">
-                    <form action="/addBook" method="POST" enctype="multipart/form-data">
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label  for="bookname">Book Title</label>
-                                <input  name="title" type="text" class="form-control"  id="bookname"
-                                    placeholder="Name of the Book" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="bookname">Author Name</label>
-                                <input  name="author" type="text" class="form-control" id="authorname"
-                                    placeholder="Name of the Author" required>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-3 mb-3">
-                                    <label for="bookname">Genre</label>
-                                    <input name="genre" type="text" class="form-control"  id="genrename"
-                                        placeholder="Book Genre" required>
-                                </div>
-                                <div >
-                                    <label for="language">Language</label>
-                                    <input type="string" name="language" id="language">
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="condition">Condition</label>
-                                    <select name="condition" class="custom-select" id="condition"  required>
-                                        <option selected disabled value="">Condition of the book</option>
-                                        <option>Best </option>
-                                        <option>Average</option>
-                                        <option>Bad</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <label for="mrpprice">MRP</label>
-                                    <input name="orignal_price" type="number" class="form-control" " id="mrpprice"
-                                         placeholder="MRP" required>
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <label for="spprice">Selling Price</label>
-                                    <input type="number" class="form-control" name="selling_price" id="spprice"
-                                         placeholder="Selling Price" required>
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <label for="image">Upload Image</label>
-                                    <input 
-                                    type="file" 
-                                    name="image" 
-                                    id="image" >
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-12 mb-3">
-                                    <label for="textarea">About the book</label>
-                                    <textarea type="text" name="description" id="about" class="form-control" cols="200" rows="4"
-                                     placeholder="Comment about the content of the book"></textarea>
-                                </div>
-                            </div>
-                            <div class="row-header">
-                                <div class="col text-center">
-                                    <button type="submit" class="btn btn-success">Upload</button>
-                                </div>
-                            </div>
+            <!-- books -->
+
+            <div class="sellbooks">
+                <div class="container">
+                    <div class="row mt-4">
+                        <div class="col text-center mt-4">
+                            <p class="lead">Sell Books</p>
                         </div>
-                    </form>
+                    </div>
+                    <div class="row row-content mt-4 d-flex justify-content-center">
+                        <div class="col-10 col-md-12">
+                            <form action="/addBook" method="POST" enctype="multipart/form-data">
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="bookname">Book Title</label>
+                                        <input name="title" type="text" class="form-control" id="bookname"
+                                            placeholder="Name of the Book" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="bookname">Author Name</label>
+                                        <input name="author" type="text" class="form-control" id="authorname"
+                                            placeholder="Name of the Author" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="bookname">Genre</label>
+                                            <select name="genre" class="form-control" id="genrename" class="custom-select" required>
+                                            <option selected disabled value="">Select Genre</option>
+                                            <option>Action </option>
+                                            <option>Adventure</option>
+                                            <option>Horror</option>
+                                            <option>Fiction</option>
+                                            <option>Science</option>
+                                            <option>Non-Fiction</option>
+                                            <option>Technology</option>
+                                            <option>Self-help</option>
+                                            <option>Spiritual</option>
+                                            <option>Kids</option>
+                                            <option>Other</option>
+                                
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="language">Language</label>
+                                        <!-- <input name="language" id="language" type="string" class="form-control"
+                                        placeholder="Book Genre" required> -->
+                                        <select name="language" id="language" class="custom-select" required>
+                                            <option selected disabled value="">Language</option>
+                                            <option>Hindi </option>
+                                            <option>English</option>
+                                            <option>Kannada</option>
+                                            <option>Tamil</option>
+                                            <option>Telegu</option>
+                                            <option>Marathi</option>
+                                            <option>Punjabi</option>
+                                            <option>Guajarati</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="condition">Condition</label>
+                                        <select name="condition" class="custom-select" id="condition" required>
+                                            <option selected disabled value="">Condition of the book</option>
+                                            <option>Best </option>
+                                            <option>Average</option>
+                                            <option>Bad</option>
+                                        </select>
+                                    </div>
+
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="mrpprice">MRP</label>
+                                        <input name="orignal_price" type="number" class="form-control" " id=" mrpprice"
+                                            placeholder="MRP" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="spprice">Selling Price</label>
+                                        <input type="number" class="form-control" name="selling_price" id="spprice"
+                                            placeholder="Selling Price" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="image">Upload Image</label>
+                                        <input type="file" name="image" id="image">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="textarea">About the book</label>
+                                        <textarea type="text" name="description" id="about" class="form-control"
+                                            cols="200" rows="4"
+                                            placeholder="Comment about the content of the book"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row-header">
+                                    <div class="col text-center">
+                                        <button type="submit" class="btn btn-success">Upload</button>
+                                    </div>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-    
-            <div class="container-fluid mt-4">
-                <div class="row-footer text-center">
-                    <div class="col-12 col-md-12">
-                        <p class="lead muted">© Boook Store 2021</p>
+
+                <div class="container-fluid mt-4">
+                    <div class="row-footer text-center">
+                        <div class="col-12 col-md-12">
+                            <p class="lead muted">© Boook Store 2021</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+            </div>
 
-    <%- include('../includes/footer.ejs') %>
-</body>
+            <%- include('../includes/footer.ejs') %>
+    </body>
 
-</html>
+    </html>

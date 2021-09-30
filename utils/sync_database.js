@@ -5,7 +5,7 @@ const user_table="CREATE TABLE IF NOT EXISTS `users`("
     +"`firstName` VARCHAR(50) NOT NULL,"
     +"`lastName` VARCHAR(50) NOT NULL,"
     +"`email` VARCHAR(50) NOT NULL,"
-    +"`password` VARCHAR(50) NOT NULL,"
+    +"`password` VARCHAR(255) NOT NULL,"
     +"`CITY` VARCHAR(30) NOT NULL,"
     +"`pincode` VARCHAR(10) NOT NULL,"
     +"`mobileNumber` VARCHAR(20) NOT NULL,"
@@ -25,7 +25,7 @@ const bookTable="CREATE TABLE IF NOT EXISTS `books`("
     +"`id` INT PRIMARY KEY AUTO_INCREMENT,"
     +"`title` VARCHAR(30) NOT NULL,"
     +"`selling_price`  DECIMAL(5,2) NOT NULL,"
-    +"`cost_price`  DECIMAL(5,2) NOT NULL,"
+    +"`orignal_price`  DECIMAL(5,2) NOT NULL,"
     +'`user_id` INT NOT NULL,'
     +'`author_id` INT NOT NULL,'
     +'`language` VARCHAR(30) NOT NULL, '
