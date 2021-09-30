@@ -96,7 +96,7 @@ class Book{
     }
 
     static getTotalPrice(bookIds){
-        const command="SELECT SUM(orignal_price) AS cost FROM books WHERE id IN (?);"
+        const command="SELECT SUM(selling_price) AS selling_cost,SUM(orignal_price) AS orignal_cost FROM books WHERE id IN (?);"
         return db.query(command,[bookIds]);
     }
 
