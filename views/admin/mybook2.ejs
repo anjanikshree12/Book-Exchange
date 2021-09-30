@@ -4,21 +4,9 @@
 
     <!-- books -->
 
-    <div class="container">
-        <div class="row mt-4">
-            <div class="col text-center">
-                <p class="lead">Uploaded Items</p>
-            </div>
-        </div>
+    <%- include('../includes/booksforsale.ejs',{prods:prods}) %>
 
-        <div class="container-fluid mt-4">
-            <div class="row-footer text-center">
-                <div class="col-12 col-md-12">
-                    <p class="lead muted">© Boook Store 2021</p>
-                </div>
-            </div>
-        </div>
-    </div>
+       
 
     <%- include('../includes/footer.ejs') %>
 </body>

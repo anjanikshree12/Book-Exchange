@@ -96,13 +96,25 @@ exports.getBooksByGenre=(req,res,next)=>{
     Book.getBookByGenre(genre,orderBy,userId)
     .then(result=>{
         console.log(result[0]);
-        res.render('shop/bookCity',{
+        res.render('auth/index',{
             prods:result[0],
             path:'/genreBook/'+genre
         })
     })
 }
 
+exports.getBooksByLanguage=(req,res,next)=>{
+    const language=req.params.language;
+    const orderBy=req.query.orderBy;
+    const userId=req.user.id;
+    Book.getBooksbyLanguage(language,orderBy,userId)
+    .then(result=>{
+        res.render('auth/index',{
+            prods:result[0],
+            path:'/langugeBook/'+language
+        })
+    })
+}
 
 exports.addToCart=(req,res,next)=>{
     // console.log(req.body);
