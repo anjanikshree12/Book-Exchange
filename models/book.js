@@ -21,7 +21,7 @@ class Book{
     }
 
     static getBookByAuthor(){
-        const command="SELECT * FROM books "
+        const command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books "
         +"JOIN authors "
         +"ON authors.id=author_id WHERE books.available=1";
         return db.execute(command);
@@ -29,7 +29,7 @@ class Book{
     }
 
     static getBookByCity(cityName,orderBy,userID){
-        let command="SELECT books.id,title,orignal_price,selling_price,imageUrl FROM (SELECT * FROM users WHERE city=?) as u " 
+        let command="SELECT books.id,title,orignal_price,selling_price,imageUrl,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM (SELECT * FROM users WHERE city=?) as u " 
         +"JOIN books " 
         +"ON u.id=user_id WHERE user_id!=? AND books.available=1 ";
         if(orderBy=='true'){
@@ -38,7 +38,7 @@ class Book{
         return db.execute(command,[cityName,userID]); 
     }
     static getBookByUserId(userId){
-        const command="SELECT books.id,title,selling_price,orignal_price,available,imageUrl,bcondition,user_id FROM users "
+        const command="SELECT books.id,title,selling_price,orignal_price,available,imageUrl,bcondition,user_id,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM users "
         +"JOIN books "
         +"ON users.id=user_id "
         +"WHERE users.id=?;"
@@ -57,7 +57,7 @@ class Book{
     }
 
     static getBookByAuthorId(authorId,orderByPrice,userId){
-        let command="SELECT * FROM books WHERE author_id=? AND available=1";
+        let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books WHERE author_id=? AND available=1";
 
         if(orderByPrice=='true'){
             command+=" ORDER BY orignal_price;"
@@ -66,7 +66,7 @@ class Book{
     }
 
     static getBookByGenre(genre,orderByPrice,userId){
-            let command="SELECT * FROM books where genre=?  AND available=1 ";
+            let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books where genre=?  AND available=1 ";
          
         if(orderByPrice=='true'){
             command+="ORDER BY orignal_price;"
@@ -75,7 +75,7 @@ class Book{
     }
 
     static getBooksbyLanguage(language,orderByPrice,userId){
-        let command="SELECT * FROM books where language=?  AND available=1 ";
+        let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books where language=?  AND available=1 ";
      
     if(orderByPrice=='true'){
         command+="ORDER BY orignal_price;"
@@ -106,7 +106,7 @@ class Book{
     }
     
     static getAllBooks(orderBy){
-        const command="SELECT * FROM BOOKS JOIN AUTHORS ON books.author_id=authorS.id  WHERE AVAILABLE=1 ";
+        const command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM BOOKS JOIN AUTHORS ON books.author_id=authorS.id  WHERE AVAILABLE=1 ";
         if(orderBy=='true'){
             command+=' ORDER BY orignal_price';
         }
