@@ -4,6 +4,7 @@
         <%- include('../includes/loggedinnav.ejs') %>
 
             <!-- books -->
+            <%if(prods.length>0){%>
             <div class="cart">
 
                 <div class="container">
@@ -120,7 +121,10 @@
                 </div>
 
             </div>
-
+            <%}else{%>
+                <div><p>Wishlist empty</p></div>
+                
+                <%}%>
             <%- include('../includes/footer.ejs') %>
     </body>
 
