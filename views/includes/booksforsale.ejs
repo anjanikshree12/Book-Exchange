@@ -12,11 +12,11 @@
                 <% for (let product of prods) { %>
                     <%if(product.available==0){continue}%>
                         <%if(count%4==0){%>
-                            <div class="row mt-2 d-flex justify-content-center">
+                            <div class="row mt-2 mx-auto">
                                 <div class="card-deck">
                                     <%}%>
                                         <div class="card mt-4 text-center border rounded"
-                                            style="background-color: #e3f2fd;">
+                                            style="width: 18rem;">
                                             <!-- <div class="card-header" style="background-color: #e3f2fd;">
                                                
                                             </div> -->
@@ -39,7 +39,7 @@
                                                         </p>
 
                                             </div>
-                                            <div class="card-footer" style="background-color: #e3f2fd;">
+                                            <div class="card-footer" style="background-color: #50cbfc;">
                                                 <small>
                                                     <p>Condition : <%= product.bcondition %>
                                                     </p>
