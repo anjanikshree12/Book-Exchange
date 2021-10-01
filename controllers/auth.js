@@ -1,11 +1,21 @@
 const path=require('path');
 const User=require('../models/user')
 const bcrypt=require('bcrypt')
-
+const Book=require('../models/book')
 
 exports.getLogin=(req,res,next)=>{
     // console.log(path.join(__dirname,'..','views','auth','login.html'));
-    res.render('auth/index',{prods:[]});
+    Book.getAllBooks('false').then(result=>{
+        console.log(result[0]);
+        res.render('auth/index',{prods:result[0],
+            path:'/login'
+        });
+
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+    
 }
 
 

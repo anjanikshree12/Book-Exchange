@@ -31,6 +31,10 @@ class Cart{
         return db.execute(command,[userId]);
     }
 
+    static getCartNum(userId){
+        let command="SELECT COUNT(*) as n FROM CART WHERE user_id=?";
+        return db.execute(command,[userId]);
+    }
 }
 
 module.exports=Cart;

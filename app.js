@@ -8,6 +8,7 @@ const adminRoutes=require('./routes/admin')
 const sync_db = require('./utils/sync_database');
 const session=require('express-session');
 const { execute } = require('./utils/database');
+const Cart=require('./models/cart')
 const  MySQLStore = require('express-mysql-session')(session);
 const path=require('path');
 const multer=require('multer');
@@ -52,6 +53,8 @@ app.use('/images',express.static(path.join(__dirname,'images')));
 app.use(multer({storage:fileStroge,fileFilter:fileFilter}).single('image'));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
+
 app.use(session({
     secret: 'secret',
     resave: false,
@@ -74,8 +77,19 @@ app.use((req,res,next)=>{
 
 app.use((req, res, next) => {
     res.locals.isAuth  = req.session.isLoggedIn;
+    
     if(req.user)
     res.locals.userId=req.user.id;
+    else
+    res.locals.userId=-1;
+    if(req.user){
+        Cart.getCartNum(req.user.id).then(result=>{
+            res.locals.cartnum=result[0][0].n;
+            next()
+        }).catch(err=>{
+            console.log(err);
+        })
+    }else
     next();
   });
 // console.log(1);
