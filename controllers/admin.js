@@ -228,12 +228,13 @@ exports.postAddAddress=(req,res,next)=>{
         console.log('address added');
         if(req.body.make_default=='on'){
             console.log(1);
-            Address.removeDefaultExceptOne(id)
+            Address.removeDefaultExceptOne(id,req.user.id)
             .then(result1=>{
                 console.log(result1[0]);
             })
-    
+           
         }
+        res.redirect('/showOrders')
     })
     .catch(err=>{
         console.log(err);

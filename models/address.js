@@ -33,9 +33,9 @@ class Address{
         return db.execute(command,[locality,state,pin_code,type,district,add_id]);
     }
 
-    static removeDefaultExceptOne(r_id){
-        const command="UPDATE addresses SET default_add=0 where id <> ?; "
-        return db.execute(command,[r_id]);
+    static removeDefaultExceptOne(r_id,userId){
+        const command="UPDATE addresses SET default_add=0 where id <> ? AND user_id=?; "
+        return db.execute(command,[r_id,userId]);
     }
 }
 
