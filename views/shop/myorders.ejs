@@ -15,7 +15,7 @@
                                         <h5 class="lead">Order History</h5>
                                     </div>
                                     
-                                    <div class="card-body">
+                                    <div class="card-body text-white" style="background: #6d00d3;">
                                         <!-- card-body -->
                                         <%if(orders.length<=0){%>
                                             <p>Nothing here!</p>
@@ -38,9 +38,66 @@
                                                 <h6>Rs. <%=product.selling_price%></h6>
                                             </div>
                                             <div class="col-12 col-md-4">
-                                                <h6><span class="fa fa-circle"></span> Delivered on <%=product.order_time%></h6>
+                                                <h6>Delivered on <%=product.order_time%></h6>
                                                 <small><p>Your item has been delivered.</p></small>
-                                                <p class="mt-4">Rate and Review Product</p>
+                                                <div class="rating" 
+                                                style="body {
+                                                    height: 100vh;
+                                                    display: grid;
+                                                    place-items: center;
+                                                    overflow: hidden;
+                                                 }
+                                                 
+                                                 .rating {
+                                                    position: relative;
+                                                    width: 180px;
+                                                    background: transparent;
+                                                    display: flex;
+                                                    justify-content: center;
+                                                    align-items: center;
+                                                    gap: .3em;
+                                                    padding: 5px;
+                                                    overflow: hidden;
+                                                    border-radius: 20px;
+                                                    box-shadow: 0 0 2px #b3acac;
+                                                 }
+                                                 
+                                                 .rating__result {
+                                                    position: absolute;
+                                                    top: 0;
+                                                    left: 0;
+                                                    transform: translateY(-10px) translateX(-5px);
+                                                    z-index: -9;
+                                                    font: 3em Arial, Helvetica, sans-serif;
+                                                    color: #ebebeb8e;
+                                                    pointer-events: none;
+                                                 }
+                                                 
+                                                 .rating__star {
+                                                    font-size: 1.3em;
+                                                    cursor: pointer;
+                                                    color: #dabd18b2;
+                                                    transition: filter linear .3s;
+                                                 }
+                                                 
+                                                 .rating__star:hover {
+                                                    filter: drop-shadow(1px 1px 4px gold);
+                                                 }">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <h6>Rate: <span class="rating__result"></span></h6> 
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <i class="rating__star fa fa-star-o"></i>
+                                                            <i class="rating__star fa fa-star-o"></i>
+                                                            <i class="rating__star fa fa-star-o"></i>
+                                                            <i class="rating__star fa fa-star-o"></i>
+                                                            <i class="rating__star fa fa-star-o"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
             
@@ -166,35 +223,45 @@
                     </div>
                 </div>
 
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                     <!-- myorders css and container divs -->
                 </div>
             </div>
 
 
             <%- include('../includes/footer.ejs') %>
+            <!-- rating.js file -->
+    <script>
+                    const ratingStars = [...document.getElementsByClassName("rating__star")];
+            const ratingResult = document.querySelector(".rating__result");
+
+            // printRatingResult(ratingResult);
+
+            function executeRating(stars, result) {
+            const starClassActive = "rating__star fa fa-star";
+            const starClassUnactive = "rating__star fa fa-star-o";
+            const starsLength = stars.length;
+            let i;
+            stars.map((star) => {
+                star.onclick = () => {
+                    i = stars.indexOf(star);
+
+                    if (star.className.indexOf(starClassUnactive) !== -1) {
+                        printRatingResult(result, i + 1);
+                        for (i; i >= 0; --i) stars[i].className = starClassActive;
+                    } else {
+                        printRatingResult(result, i);
+                        for (i; i < starsLength; ++i) stars[i].className = starClassUnactive;
+                    }
+                };
+            });
+            }
+
+            function printRatingResult(result, num = 0) {
+            result.textContent = `${num}/5`;
+            }
+
+            executeRating(ratingStars, ratingResult);
+    </script>
     </body>
 
     </html>
