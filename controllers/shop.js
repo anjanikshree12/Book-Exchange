@@ -257,7 +257,7 @@ exports.getCart=(req,res,next)=>{
                 path:'/cart',
                 cost:0,
                 books:[],
-                addresses:result1[0]
+                addresses:result3[0]
             })
         }else{
         Book.getBookInArray(bookIds,orderBy)
