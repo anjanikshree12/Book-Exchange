@@ -243,7 +243,9 @@ exports.getCart=(req,res,next)=>{
     console.log(orderBy);
     Cart.getCart(userId)
     .then(result=>{
-        // console.log(result[0]);
+        Address.getAddressById(userId)
+        .then(result3=>{
+            // console.log(result1[0].length);
         let bookIds=[];
         for(let i=0;i<result[0].length;i++){
             bookIds.push(result[0][i].book_id);
@@ -254,7 +256,8 @@ exports.getCart=(req,res,next)=>{
                 prods:[],
                 path:'/cart',
                 cost:0,
-                books:[]
+                books:[],
+                addresses:result3[0]
             })
         }else{
         Book.getBookInArray(bookIds,orderBy)
@@ -263,13 +266,15 @@ exports.getCart=(req,res,next)=>{
             .then(result1=>{
                 console.log(bookIds);
                 // console.log(result[0]);
+                console.log(result1[0].length);
                 return res.render('shop/cart2',{
                     prods:result[0],
                     path:'/cart',
                     orignal_cost:result1[0][0].orignal_cost,
                     selling_cost:result1[0][0].selling_cost,
                     saving:result1[0][0].orignal_cost-result1[0][0].selling_cost,
-                    books:bookIds
+                    books:bookIds,
+                    addresses:result3[0]
                 })
             })
             .catch(err=>{
@@ -282,6 +287,9 @@ exports.getCart=(req,res,next)=>{
             console.log(err);
         })
     }
+        })
+        // console.log(result[0]);
+        
     })
 
     .catch(err=>{
@@ -377,18 +385,21 @@ exports.postOrder=(req,res,next)=>{
 exports.getOrders=(req,res,next)=>{
     Order.getOrdersByUserId(req.user.id)
     .then(result=>{
+        Address.getAddressById(req.user.id)
+        .then(result2=>{
         console.log(result[0]);
+        console.log(result2[0]);
         if(result[0].length==0){
             res.render('shop/myorders',{
                 path:'/myorders',
                 orders:"",
-                name:""
+                name:"",
+                addresses:result2[0]
             })
-        }
+        }else{
         Book.getOwner(result[0][0].book_id)
         .then(result1=>{
-            Address.getAddressById(req.user.id)
-            .then(result2=>{
+            
                 console.log(result2[0]);
                 console.log(result1[0]);
                 res.render('shop/myorders',{
@@ -397,9 +408,12 @@ exports.getOrders=(req,res,next)=>{
                     name:result1[0][0].name,
                     addresses:result2[0]
                 })
-            })
+           
             
         })
+    }
+    })
+
         
         // console.log(orders);
     })

@@ -26,32 +26,15 @@
                                             <div class="col-6 col-md-2"><span class="fa fa-truck"></span> Deliver to
                                             </div>
                                             <div class="col-6 col-md-4">
-                                                <div class="dropdown">
-                                                    <button class="btn btn-info dropdown-toggle" type="button"
-                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="true">
-                                                        DefaultAddress-570008
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <p
-                                                            class="small d-flex justify-content-center align-items-center">
-                                                            Saved Addresses: </p>
-                                                        <a class="dropdown-item" href="#">Saved Address 1 </a>
-                                                        <a class="dropdown-item" href="#">Saved Address 2 </a>
-                                                        <a class="dropdown-item" href="#">Saved Address 3 </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            <div class="row">
-                                                                <div class="col-9 col-md-9">
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="Pincode">
-                                                                </div>
-                                                                <div class="col-3 col-md-3">
-                                                                    <span class="fa fa-search"></span>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                                <label for="language">Language</label>
+                                                <!-- <input name="language" id="language" type="string" class="form-control"
+                                                placeholder="Book Genre" required> -->
+                                                <select name="address" id="language" class="custom-select" required>
+                                                    <%addresses.forEach((address,i)=>{%>
+                                                    <option <%if(address.default_add==1)%>selected  > <%if(address.default_add==1){%> default address<%}else{%> selected address <%}%> <%=address.pin_code%> </option>
+                                                   
+                                                    <%})%>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
