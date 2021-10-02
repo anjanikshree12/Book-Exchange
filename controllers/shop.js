@@ -378,6 +378,13 @@ exports.getOrders=(req,res,next)=>{
     Order.getOrdersByUserId(req.user.id)
     .then(result=>{
         console.log(result[0]);
+        if(result[0].length==0){
+            res.render('shop/myorders',{
+                path:'/myorders',
+                orders:"",
+                name:""
+            })
+        }
         Book.getOwner(result[0][0].book_id)
         .then(result1=>{
             console.log(result1[0]);
