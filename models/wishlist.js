@@ -18,7 +18,7 @@ class Wishlist{
     }
     static getWishlist(userId){
         let command;
-        command="SELECT book_id FROM wishlist WHERE user_id=?";
+        command="SELECT book_id FROM wishlist WHERE user_id=? ";
         return db.execute(command,[userId]);
     }
     static removeFromWishlist(bookId,userId){

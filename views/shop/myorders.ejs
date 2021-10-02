@@ -117,14 +117,16 @@
                                         <h5 class="lead">My Addresses</h5>
                                     </div>
                                     <div class="card-body">
-                                        <h6>Default Address: </h6>
-                                        <p>Bailey Road, Patna - 800014</p>
+                                        <%addresses.forEach((address,i)=>{%>
+                                            <%if(address.default_add==1){%>
+                                            <h6>Default Address: </h6>
+                                            <%}else{%>
+                                            <h6>Added Address <%=i+1%>: </h6>
+                                            <%}%>
+                                            <p><%=address.locality%> , <%=address.city%>, <%=address.district%>  <%=address.state%> - <%=address.pin_code%></p>
+                            
+                                        <%})%>
                                         
-                                        <h6>Added Address 1: </h6>
-                                        <p>Vidyaranyapura Road, Mysore - 570008</p>
-                                        
-                                        <h6>Added Address 2: </h6>
-                                        <p>Vidyaranyapura Road, Mysore - 570008</p>
                                         
                                         <button type="button" class="bg-primary text-white rounded" data-toggle="modal" data-target="#addaddressModal"><span class="fa fa-plus"></span> Add Address</button>
                                         <!-- modal for addd adress -->
@@ -184,6 +186,67 @@
                                                         <input name="mobileNumber" type="number" class="form-control" id="validationDefault03" required >
                                                       </div>
                                                     </div>
+                                                    <div class="modal-body">
+                                                        <form action="/addAddress" method="POST">
+                                                            <div class="form-group">
+                                                              <label for="inputAddress">Address</label>
+                                                              <input name="locality" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                                            </div>
+                                                            <div class="form-row">
+                                                              <div class="form-group col-md-6">
+                                                                <label for="inputCity">City</label>
+                                                                <input name="city" type="text" class="form-control" id="inputCity">
+                                                              </div>
+                                                              <div class="form-group col-md-6">
+                                                                <label for="inputState">State</label>
+                                                                <select name="state" id="inputState" class="form-control">
+                                                                    <option selected>Choose...</option>
+                                                                    <option>Himachal Pradesh</option>
+                                                                    <option>Uttarakhand</option>
+                                                                    <option>Bihar</option>
+                                                                    <option>Jharkhand</option>
+                                                                    <option>West Bengal</option>
+                                                                    <option>UP</option>
+                                                                    <option>MP</option>
+                                                                    <option>Karnataka</option>
+                                                                    <option>AP</option>
+                                                                    <option>Goa</option>
+                                                                    <option>Haryana</option>
+                                                                    <option>Delhi</option>
+                                                                    <option>Gujarat</option>
+                                                                    <option>Telangana</option>
+                                                                    <option>Maharashtra</option>
+                                                                    <option>Punjab</option>
+                                                                    <option>Tamil Nadu</option>
+                                                                    <option>Other</option>
+                                                                </select>
+                                                              </div>
+                                            
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                  <label for="inputCity">District</label>
+                                                                  <input name="district" type="String" class="form-control" id="inputCity">
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputCity">PIN Code</label>
+                                                                    <input name="pin_code" type="number" class="form-control" id="inputCity">
+                                                                </div>
+                                              
+                                                              </div>
+                                                            <div class="form-group">
+                                                              <div class="form-check">
+                                                                <input  name="make_default" class="form-check-input" type="checkbox" id="gridCheck">
+                                                                <label  class="form-check-label" for="gridCheck" >
+                                                                  Set as default for all deliveries
+                                                                </label>
+                                                              </div>
+                                                            </div>
+                                                          
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Add</button>
                                                     <div class="form-row">
                                                       <div class="col-md-12 mb-3">
                                                         <label for="address">Address</label>
@@ -207,6 +270,7 @@
                                                         </div>
                                                       </div>
                                                     </div>
+                                                </form>
                                                 </div>
                                                 <div class="modal-footer">
                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
