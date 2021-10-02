@@ -38,7 +38,7 @@
                                                 <h6>Rs. <%=product.selling_price%></h6>
                                             </div>
                                             <div class="col-12 col-md-4">
-                                                <h6/><span class="fa fa-circle"></span> Delivered on   <%=product.order_time%></h6>
+                                                <h6><span class="fa fa-circle"></span> Delivered on <%=product.order_time%></h6>
                                                 <small><p>Your item has been delivered.</p></small>
                                                 <p class="mt-4">Rate and Review Product</p>
                                             </div>
@@ -72,80 +72,93 @@
                                         <button type="button" class="bg-primary text-white rounded" data-toggle="modal" data-target="#addaddressModal"><span class="fa fa-plus"></span> Add Address</button>
                                         <!-- modal for addd adress -->
                                           <!-- Modal -->
-                                            <div class="modal fade" id="addaddressModal" tabindex="-1" role="dialog" aria-labelledby="addaddressModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                          <div class="modal fade" id="addaddressModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title offset-4" id="exampleModalLabel">Add New Address</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body" style="background-color: teal;color: white;">
+                                                  <form>
+                                                    <div class="form-row">
+                                                      <div class="col-md-6 mb-3">
+                                                        <label for="validationDefault33">District</label>
+                                                        <input name="district" type="text" class="form-control" id="validationDefault33" required >
+                                                      </div>
+                                                      <div class="col-md-6 mb-3">
+                                                        <label for="validationDefault03">City</label>
+                                                        <input name="city" type="text" class="form-control" id="validationDefault03"   required>
+                                                      </div>                          
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <form>
-                                                            <div class="form-group">
-                                                              <label for="inputAddress">Address</label>
-                                                              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                                                            </div>
-                                                            <div class="form-row">
-                                                              <div class="form-group col-md-6">
-                                                                <label for="inputCity">City</label>
-                                                                <input type="text" class="form-control" id="inputCity">
-                                                              </div>
-                                                              <div class="form-group col-md-6">
-                                                                <label for="inputState">State</label>
-                                                                <select id="inputState" class="form-control">
-                                                                    <option selected>Choose...</option>
-                                                                    <option>Himachal Pradesh</option>
-                                                                    <option>Uttarakhand</option>
-                                                                    <option>Bihar</option>
-                                                                    <option>Jharkhand</option>
-                                                                    <option>West Bengal</option>
-                                                                    <option>UP</option>
-                                                                    <option>MP</option>
-                                                                    <option>Karnataka</option>
-                                                                    <option>AP</option>
-                                                                    <option>Goa</option>
-                                                                    <option>Haryana</option>
-                                                                    <option>Delhi</option>
-                                                                    <option>Gujarat</option>
-                                                                    <option>Telangana</option>
-                                                                    <option>Maharashtra</option>
-                                                                    <option>Punjab</option>
-                                                                    <option>Tamil Nadu</option>
-                                                                    <option>Other</option>
-                                                                </select>
-                                                              </div>
-                                            
-                                                            </div>
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                  <label for="inputCity">District</label>
-                                                                  <input type="String" class="form-control" id="inputCity">
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputCity">PIN Code</label>
-                                                                    <input type="number" class="form-control" id="inputCity">
-                                                                </div>
-                                              
-                                                              </div>
-                                                            <div class="form-group">
-                                                              <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                                <label class="form-check-label" for="gridCheck">
-                                                                  Set as default for all deliveries
-                                                                </label>
-                                                              </div>
-                                                            </div>
-                                                          </form>
+                                                    <div class="form-row">
+                                                      <div class="col-md-4 mb-3">
+                                                        <label for="validationDefault04">State</label>
+                                                        <select name="state" class="custom-select" id="validationDefault04" required>
+                                                          <option selected disabled value="">Select</option>
+                                                          <option>Himachal Pradesh</option>
+                                                          <option>Uttarakhand</option>
+                                                          <option>Bihar</option>
+                                                          <option>Jharkhand</option>
+                                                          <option>West Bengal</option>
+                                                          <option>UP</option>
+                                                          <option>MP</option>
+                                                          <option>Karnataka</option>
+                                                          <option>AP</option>
+                                                          <option>Goa</option>
+                                                          <option>Haryana</option>
+                                                          <option>Delhi</option>
+                                                          <option>Gujarat</option>
+                                                          <option>Telangana</option>
+                                                          <option>Maharashtra</option>
+                                                          <option>Punjab</option>
+                                                          <option>Tamil Nadu</option>
+                                                          <option>Other</option>
+                                                        </select>
+                                                      </div>
+                                                      <div class="col-md-3 mb-3">
+                                                        <label for="validationDefault04">PIN Code</label>
+                                                        <input name="pincode" type="number" class="form-control" id="validationDefault03" required >
+                                                      </div>
+                                                      <div class="col-md-5 mb-3">
+                                                        <label for="validationDefault03">Mobile No.</label>
+                                                        <input name="mobileNumber" type="number" class="form-control" id="validationDefault03" required >
+                                                      </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Add</button>
+                                                    <div class="form-row">
+                                                      <div class="col-md-12 mb-3">
+                                                        <label for="address">Address</label>
+                                                        <input name="address" type="text"  class="form-control" id="address" placeholder="New Delivery Address" required>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                      <div class="col-md-8 mb-3">
+                                                        <label for="addresstype">Type of Address</label>
+                                                        <div class=" row d-flex justify-content-around ml-2">
+                                                          <div class="col">
+                                                            <button type="button" class="form-control badge badge-pill badge-primary"><span class="fa fa-home"></span> Home</button>
+                                                          </div>
+                                                          <div class="col">
+                                                            <button type="button" class="form-control badge badge-pill badge-warning"><span class="fa fa-briefcase"></span> Office</button>
+                                                          </div>
+                                                          <div class="col">
+                                                            <button type="button" class="form-control badge badge-pill badge-info"><span class="fa fa-building"></span> Other</button>
+                                                          </div>
+                                                          
+                                                        </div>
+                                                      </div>
                                                     </div>
                                                 </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                  <button type="submit" class="btn btn-primary">Add</button>
                                                 </div>
+                                              </form>
+                                              </div>
                                             </div>
+                                          </div>
                                     </div>
                                 </div>
                             </div>
