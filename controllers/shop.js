@@ -5,7 +5,7 @@ const Cart=require('../models/cart')
 const Order=require('../models/orders');
 const OrderItem=require('../models/orderItem');
 const Wishlist = require('../models/wishlist');
-
+const Address=require('../models/address')
 exports.getHomePage=(req,res,next)=>{
     console.log(req.user);
     // console.log(req.session.user);
@@ -387,12 +387,18 @@ exports.getOrders=(req,res,next)=>{
         }
         Book.getOwner(result[0][0].book_id)
         .then(result1=>{
-            console.log(result1[0]);
-            res.render('shop/myorders',{
-                path:'/myorders',
-                orders:result[0],
-                name:result1[0][0].name
+            Address.getAddressById(req.user.id)
+            .then(result2=>{
+                console.log(result2[0]);
+                console.log(result1[0]);
+                res.render('shop/myorders',{
+                    path:'/myorders',
+                    orders:result[0],
+                    name:result1[0][0].name,
+                    addresses:result2[0]
+                })
             })
+            
         })
         
         // console.log(orders);

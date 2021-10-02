@@ -2,7 +2,7 @@ const Book=require('../models/book')
 const Author=require('../models/author');
 const Cart=require('../models/cart');
 const User = require('../models/user');
-
+const Address=require('../models/address')
 exports.getAddBook=(req,res,next)=>{
     // console.log(req.user.id);
     res.render('admin/uploadbooks',{
@@ -210,3 +210,36 @@ exports.getUserDetails=(req,res,next)=>{
     })
 }
 
+exports.postAddAddress=(req,res,next)=>{
+    const user_id=req.user.id;
+    console.log(req.body);
+    let def;
+    if(req.body.make_default=='on')
+    def=1;
+    else
+    def=0;
+    let id;
+    const address=new Address(req.body.locality,req.body.city,req.body.state,req.body.pin_code,'home',user_id,req.body.district,def);
+    address.addAddress()
+    .then(result=>{
+        console.log(result[0]);
+        id=result[0].insertId;
+        console.log(id);
+        console.log('address added');
+        if(req.body.make_default=='on'){
+            console.log(1);
+            Address.removeDefaultExceptOne(id)
+            .then(result1=>{
+                console.log(result1[0]);
+            })
+    
+        }
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+    console.log(address);
+    
+
+    
+}

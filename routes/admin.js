@@ -17,4 +17,5 @@ router.get('/userDetails/:id',isAuth,adminController.getUserDetails)
 
 router.get('/editBook/:id',isAuth,adminController.getEditBook);
 router.post('/editBook/:id',isAuth,adminController.postEditBook);
+router.post('/addAddress',isAuth,adminController.postAddAddress)
 module.exports=router

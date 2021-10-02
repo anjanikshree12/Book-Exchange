@@ -28,11 +28,8 @@ exports.postSignup=(req,res,next)=>{
     const firstName=req.body.firstName;
     const lastName=req.body.lastName;
     const password=req.body.password;
-    const city=req.body.city;
-    const state=req.body.state;
-    const address=req.body.address;
     const mobileNumber=req.body.mobileNumber;
-    const pincode=req.body.pincode;
+  
     console.log(req.body);
     User.getUserByEmail(email)
     .then(result=>{
@@ -41,7 +38,7 @@ exports.postSignup=(req,res,next)=>{
         }
         return bcrypt.hash(password,12)
         .then(hashedPassword=>{
-            const user=new User(email,firstName,lastName,hashedPassword,city,state,address,pincode,mobileNumber);
+            const user=new User(email,firstName,lastName,hashedPassword,mobileNumber);
             user.addUser()
             .then(result=>{
                 console.log('user stored');

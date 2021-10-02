@@ -60,14 +60,16 @@
                                         <h5 class="lead">My Addresses</h5>
                                     </div>
                                     <div class="card-body">
-                                        <h6>Default Address: </h6>
-                                        <p>Bailey Road, Patna - 800014</p>
+                                        <%addresses.forEach((address,i)=>{%>
+                                            <%if(address.default_add==1){%>
+                                            <h6>Default Address: </h6>
+                                            <%}else{%>
+                                            <h6>Added Address <%=i+1%>: </h6>
+                                            <%}%>
+                                            <p><%=address.locality%> , <%=address.city%>, <%=address.district%>  <%=address.state%> - <%=address.pin_code%></p>
+                            
+                                        <%})%>
                                         
-                                        <h6>Added Address 1: </h6>
-                                        <p>Vidyaranyapura Road, Mysore - 570008</p>
-                                        
-                                        <h6>Added Address 2: </h6>
-                                        <p>Vidyaranyapura Road, Mysore - 570008</p>
                                         
                                         <button type="button" class="bg-primary text-white rounded" data-toggle="modal" data-target="#addaddressModal"><span class="fa fa-plus"></span> Add Address</button>
                                         <!-- modal for addd adress -->
@@ -82,19 +84,19 @@
                                                     </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form>
+                                                        <form action="/addAddress" method="POST">
                                                             <div class="form-group">
                                                               <label for="inputAddress">Address</label>
-                                                              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                                              <input name="locality" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                                                             </div>
                                                             <div class="form-row">
                                                               <div class="form-group col-md-6">
                                                                 <label for="inputCity">City</label>
-                                                                <input type="text" class="form-control" id="inputCity">
+                                                                <input name="city" type="text" class="form-control" id="inputCity">
                                                               </div>
                                                               <div class="form-group col-md-6">
                                                                 <label for="inputState">State</label>
-                                                                <select id="inputState" class="form-control">
+                                                                <select name="state" id="inputState" class="form-control">
                                                                     <option selected>Choose...</option>
                                                                     <option>Himachal Pradesh</option>
                                                                     <option>Uttarakhand</option>
@@ -121,28 +123,29 @@
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-6">
                                                                   <label for="inputCity">District</label>
-                                                                  <input type="String" class="form-control" id="inputCity">
+                                                                  <input name="district" type="String" class="form-control" id="inputCity">
                                                                 </div>
                                                                 <div class="form-group col-md-6">
                                                                     <label for="inputCity">PIN Code</label>
-                                                                    <input type="number" class="form-control" id="inputCity">
+                                                                    <input name="pin_code" type="number" class="form-control" id="inputCity">
                                                                 </div>
                                               
                                                               </div>
                                                             <div class="form-group">
                                                               <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                                <label class="form-check-label" for="gridCheck">
+                                                                <input  name="make_default" class="form-check-input" type="checkbox" id="gridCheck">
+                                                                <label  class="form-check-label" for="gridCheck" >
                                                                   Set as default for all deliveries
                                                                 </label>
                                                               </div>
                                                             </div>
-                                                          </form>
+                                                          
                                                     </div>
                                                     <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Add</button>
+                                                    <button type="submit" class="btn btn-primary">Add</button>
                                                     </div>
+                                                </form>
                                                 </div>
                                                 </div>
                                             </div>
