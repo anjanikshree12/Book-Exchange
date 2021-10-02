@@ -14,7 +14,6 @@
     margin-top: 10vh;
 }
 .footer{
-    background-color: #D1C4E9;
     margin:0px auto;
     padding: 20px 0px 20px 0px;
     align-items: flex-end;
@@ -26,6 +25,10 @@
     color: inherit;
     font-family: 'Urbanist', sans-serif;
     font-weight: bold;
+    
+}
+.navbar ul li a{
+    color: white;
 }
 .card img{
     width: 100%;
@@ -38,10 +41,11 @@
     font-family: 'Montserrat', sans-serif;
 } */
 body{
-background: whitesmoke;
+background: #ffffff;
+font-family: 'Noto Sans', sans-serif;
 }
 .nav2{
-    margin-top:9vh;
+    margin-top: 9vh;
 }
 .loggedinbooks{
     margin-top: 20vh;
