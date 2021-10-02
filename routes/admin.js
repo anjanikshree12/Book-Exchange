@@ -15,5 +15,6 @@ router.post('/deleteBook',isAuth,adminController.deleteBook);
 
 router.get('/userDetails/:id',isAuth,adminController.getUserDetails)
 
-
+router.get('/editBook/:id',isAuth,adminController.getEditBook);
+router.post('/editBook/:id',isAuth,adminController.postEditBook);
 module.exports=router

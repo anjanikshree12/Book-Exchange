@@ -10,7 +10,7 @@ exports.getHomePage=(req,res,next)=>{
     console.log(req.user);
     // console.log(req.session.user);
     const orderBy=req.params.orderBy;
-    Book.getAllBooks(orderBy)
+    Book.getAllBooks(orderBy,req.user.id)
     .then(result=>{
         res.render('auth/loggedin',{
             prods:result[0],
