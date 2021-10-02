@@ -64,6 +64,17 @@ const orderItemsTable="CREATE TABLE IF NOT EXISTS `order_items`("
     +"FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE, "
     +"FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE); "
 
+const addressTable="CREATE TABLE IF NOT EXISTS `addresses`("
+                +"`id` INT PRIMARY KEY AUTO_INCREMENT, "
+                +"`user_id` INT NOT NULL, "
+                +"`locality` VARCHAR(255) NOT NULL, "
+                +"`city` VARCHAR(100) NOT NULL, "
+                +"`state` VARCHAR(100) NOT NULL, "
+                +"`pin_code` VARCHAR(20) NOT NULL, "
+                +"`type` VARCHAR(50) NOT NULL, "
+                +"`district` VARCHAR(50) NOT NULL, "
+                +"`default_add` TINYINT(1)  DEFAULT 0, "
+                +"FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE); "
 
     exports.sync = async () => {
         try {
@@ -76,6 +87,7 @@ const orderItemsTable="CREATE TABLE IF NOT EXISTS `order_items`("
             await db.execute(wishlistTable);
             await db.execute(orderTable);
             await db.execute(orderItemsTable);
+            await db.execute(addressTable);
         } catch (err) {
             console.log(err);
         }
