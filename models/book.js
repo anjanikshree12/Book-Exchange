@@ -38,9 +38,11 @@ class Book{
         return db.execute(command,[cityName,userID]); 
     }
     static getBookByUserId(userId){
-        const command="SELECT books.id,title,selling_price,orignal_price,available,imageUrl,bcondition,user_id,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM users "
+        const command="SELECT books.id,title,name,selling_price,orignal_price,available,imageUrl,bcondition,user_id,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM users "
         +"JOIN books "
-        +"ON users.id=user_id "
+        +"ON users.id=user_id " 
+        +"JOIN authors "
+        +"ON author_id=authors.id "
         +"WHERE users.id=?;"
         return db.execute(command,[userId]);
     }
@@ -105,12 +107,12 @@ class Book{
         return db.query(command,[books]);
     }
     
-    static getAllBooks(orderBy){
-        const command="SELECT *,books.id as id,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM BOOKS JOIN AUTHORS ON books.author_id=authorS.id  WHERE AVAILABLE=1 ";
+    static getAllBooks(orderBy,userId){
+        const command="SELECT *,books.id as id,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM BOOKS JOIN AUTHORS ON books.author_id=authorS.id  WHERE AVAILABLE=1 AND user_id!=?";
         if(orderBy=='true'){
             command+=' ORDER BY orignal_price';
         }
-        return db.execute(command)
+        return db.execute(command,[userId])
     }
     static getOwner(book_id){
         const command="SELECT user_id FROM books WHERE id=?";
@@ -118,11 +120,23 @@ class Book{
     }
 
     static getBookDetailsById(id){
-        const command="SELECT books.id AS book_id,books.title AS title,books.language AS language,books.selling_price AS sp,books.orignal_price AS op,users.id AS user_id,users.city AS city,users.name AS name  FROM books " 
+        const command="SELECT books.id AS book_id,books.title AS title,books.language AS language,books.selling_price AS sp,books.orignal_price AS op,users.id AS user_id,users.city AS city,books.description AS descr FROM books " 
         +"JOIN users "
         +"ON users.id=books.user_id "
         +"WHERE books.id=?";
         return db.execute(command,[id]);
+    }
+
+    static getBookDetails(id){
+        const command="SELECT books.id as id,books.title AS title,books.orignal_price AS op,books.selling_price AS sp,books.language as lang,books.description AS description,books.genre AS genre,authors.name as author,books.bcondition AS bcondition FROM books "+
+                    "JOIN authors ON author_id=authors.id "+
+                    "WHERE books.id=?"
+        return db.execute(command,[id])
+    }
+    
+    static editBookByid(id,title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl,description,bcondition){
+        const command="UPDATE BOOKS SET title=?,orignal_price=?,selling_price=?,user_id=?,genre=?,language=?,author_id=?,imageUrl=?,description=?,bcondition=? WHERE books.id=?;  "
+        return db.query(command,[title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl,description,bcondition,id]);
     }
 }
 

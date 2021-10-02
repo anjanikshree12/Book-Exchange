@@ -10,6 +10,103 @@ exports.getAddBook=(req,res,next)=>{
     });
 }
 
+
+exports.getEditBook=(req,res,next)=>{
+    const  bookId=req.params.id;
+    const userId=req.user.id;
+    Book.getOwner(bookId)
+    .then(result=>{
+        const owner_id=result[0][0].user_id;
+        if(owner_id!=userId){
+            res.redirect('/mybooks')
+        }
+        Book.getBookDetails(bookId)
+        .then(result2=>{
+            console.log(result2[0]);
+            res.render('admin/uploadbooks',{
+            title:result2[0][0].title,
+            sp:result2[0][0].sp,
+            op:result2[0][0].op,
+            descr:result2[0][0].description,
+            author:result2[0][0].author,
+            language:result2[0][0].lang,
+            genre:result2[0][0].genre,
+            condition:result2[0][0].bcondition,
+            id:result2[0][0].id,
+            path:'/editBook'
+        })
+        })
+
+        
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+
+}
+
+exports.postEditBook=(req,res,next)=>{
+    console.log('kjhjh');
+    console.log(req.body);
+    console.log(req.file);
+    const title=req.body.title;
+    const orignal_price=req.body.orignal_price;
+    const selling_price=req.body.selling_price;
+    const genre=req.body.genre;
+    const language=req.body.language;
+    const authorName=req.body.author;
+    const image=req.file;
+    const imageUrl=image.path;
+    const description=req.body.description;
+    const condition=req.body.condition;
+    const user_id=req.user.id;
+    const book_id=req.body.id;
+    let author_id;
+    Author.findByName(authorName)
+    .then(([authors])=>{
+        console.log('tu');
+        console.log(authors.length);
+        console.log(authors);
+        if(authors.length>0){
+            console.log(authors[0]);
+            // console.log('authors=> ');
+            // console.log(authors[0][0].id);
+            return authors[0].id;
+            // return id
+            
+        }else{
+            return Author.addAuthor(authorName)
+            .then(([{insertId}])=>{
+                console.log(insertId);
+                // console.log("add author result=> ")
+                // console.log(result[0].insertId);
+                // return result[0].insertId
+                return insertId;
+            })
+        
+        }
+    })
+    .then(aid=>{
+                console.log("final"+aid);
+                console.log(req.body);
+                const book=new Book(title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl,description,condition);
+                console.log(book);
+                Book.editBookByid(book_id,title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl,description,condition)
+                .then(result=>{
+                    console.log('book-updated!');
+                    res.redirect('/myBooks')
+                })
+                .catch(err=>{
+                    console.log(err);
+                });
+    })
+    .catch(err=>{
+        console.log(err);
+    
+})
+}
+
+
 exports.postAddBook=(req,res,next)=>{
     console.log(req.body);
     const title=req.body.title;
@@ -51,13 +148,14 @@ exports.postAddBook=(req,res,next)=>{
         }
     })
     .then(aid=>{
+
                 console.log("final"+aid);
                 // console.log(req.body);
                 const book=new Book(title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl,description,condition);
                 console.log(book);
-                book.addBook()
+                book.addBook(title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl,description,condition)
                 .then(result=>{
-                    console.log('book-added!');
+                    console.log('book-updated!');
                     res.redirect('/myBooks')
                 })
                 .catch(err=>{
@@ -67,11 +165,12 @@ exports.postAddBook=(req,res,next)=>{
     .catch(err=>{
         console.log(err);
     });
+}
     
    
    
 
-}
+
 
 
 exports.getMyBook=(req,res,next)=>{

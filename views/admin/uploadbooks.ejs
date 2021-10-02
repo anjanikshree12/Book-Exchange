@@ -14,16 +14,16 @@
                     </div>
                     <div class="row row-content mt-4 d-flex justify-content-center">
                         <div class="col-10 col-md-12">
-                            <form action="/addBook" method="POST" enctype="multipart/form-data">
+                            <form <%if(path=='/editBook'){%> action="/editBook/<%=id%>" <%}else{%>  action="/addBook" <%}%> method="POST" enctype="multipart/form-data">
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
                                         <label for="bookname">Book Title</label>
-                                        <input name="title" type="text" class="form-control" id="bookname"
+                                        <input name="title" type="text" class="form-control" id="bookname" <%if(path=='/editBook'){%> value="<%=title%>"<%}%>
                                             placeholder="Name of the Book" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="bookname">Author Name</label>
-                                        <input name="author" type="text" class="form-control" id="authorname"
+                                        <input name="author" type="text" class="form-control" id="authorname" <%if(path=='/editBook'){%> value="<%=author%>"<%}%>
                                             placeholder="Name of the Author" required>
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                                         <label for="bookname">Genre</label>
                                         <select name="genre" class="form-control" id="genrename" class="custom-select"
                                             required>
-                                            <option selected disabled value="">Select Genre</option>
+                                            <option selected <%if(path!='/editBook'){%> disabled  <%}%>  > <%if(path=='/editBook'){%> <%=genre%><%}else{%> Select Genre <%}%></option>
                                             <option>Action </option>
                                             <option>Adventure</option>
                                             <option>Horror</option>
@@ -52,7 +52,7 @@
                                         <!-- <input name="language" id="language" type="string" class="form-control"
                                         placeholder="Book Genre" required> -->
                                         <select name="language" id="language" class="custom-select" required>
-                                            <option selected disabled value="">Language</option>
+                                            <option selected <%if(path!='/editBook'){%> disabled  <%}%>> <%if(path=='/editBook'){%> <%=language%><%}else{%> Language<%}%> </option>
                                             <option>Hindi </option>
                                             <option>English</option>
                                             <option>Kannada</option>
@@ -67,7 +67,7 @@
                                     <div class="col-md-4 mb-3">
                                         <label for="condition">Condition</label>
                                         <select name="condition" class="custom-select" id="condition" required>
-                                            <option selected disabled value="">Condition of the book</option>
+                                            <option selected <%if(path!='/editBook'){%> disabled  <%}%> ><%if(path=='/editBook'){%> <%=condition%><%}else{%> Condition of the book  <%}%></option>
                                             <option>Best </option>
                                             <option>Average</option>
                                             <option>Bad</option>
@@ -80,12 +80,12 @@
                                     <div class="col-md-4 mb-3">
                                         <label for="mrpprice">MRP</label>
                                         <input name="orignal_price" type="number" class="form-control" " id=" mrpprice"
-                                            placeholder="MRP" required>
+                                            placeholder="MRP"   <%if(path=='/editBook'){%> value="<%=op%>"<%}%> required>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="spprice">Selling Price</label>
                                         <input type="number" class="form-control" name="selling_price" id="spprice"
-                                            placeholder="Selling Price" required>
+                                            placeholder="Selling Price"  <%if(path=='/editBook'){%> value="<%=sp%>"<%}%> required>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="image">Upload Image</label>
@@ -97,9 +97,12 @@
                                         <label for="textarea">About the book</label>
                                         <textarea type="text" name="description" id="about" class="form-control"
                                             cols="200" rows="4"
-                                            placeholder="Comment about the content of the book"></textarea>
+                                            placeholder="Comment about the content of the book"    > <%if(path=='/editBook'){%> <%=descr%><%}%></textarea>
                                     </div>
                                 </div>
+                                <%if(path=='/editBook'){%>
+                                <input type="hidden" name="id" value="<%=id%>">
+                                <%}%>
                                 <div class="row-header">
                                     <div class="col text-center">
                                         <button type="submit" class="btn btn-success">Upload</button>

@@ -5,7 +5,7 @@ const Book=require('../models/book')
 
 exports.getLogin=(req,res,next)=>{
     // console.log(path.join(__dirname,'..','views','auth','login.html'));
-    Book.getAllBooks('false').then(result=>{
+    Book.getAllBooks('false',-1).then(result=>{
         console.log(result[0]);
         res.render('auth/index',{prods:result[0],
             path:'/login'
