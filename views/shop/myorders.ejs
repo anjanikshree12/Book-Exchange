@@ -14,56 +14,45 @@
                                     <div class="card-header text-center">
                                         <h5 class="lead">Order History</h5>
                                     </div>
+                                    
                                     <div class="card-body">
                                         <!-- card-body -->
+                                        <%if(orders.length<=0){%>
+                                            <p>Nothing here!</p>
+                                        <%}else{%>
                                         <!-- ordered item 1 -->
+                                        <% orders.forEach(product => { %>
+                                        
                                         <div class="row mt-4 border-bottom">
                                             <div class="col-12 col-md-3">
-                                                <img src="/images/2021-09-29T15-19-38.031ZSnapchat-1793318258.jpg" class="rounded" alt="pic">
+                                                <img src="<%=product.imageUrl%>" class="rounded" alt="pic">
                                                 <br>
                                                 <br>
                                             </div>
                                             <div class="col-12 col-md-3">
-                                                <h6>Item Name</h6>
-                                                <small><p>Item Description</p></small>
-                                                <p>Seller: Anjani</p>
+                                                <h6><%= product.title %></h6>
+                                                <small><p><%=product.description%></p></small>
+                                                <p>Seller: <%=name%></p>
                                             </div>
                                             <div class="col-12 col-md-2">
-                                                <h6>Rs. XXXX</h6>
+                                                <h6>Rs. <%=product.selling_price%></h6>
                                             </div>
                                             <div class="col-12 col-md-4">
-                                                <h6/><span class="fa fa-circle"></span> Delivered on 25/08/21</h6>
+                                                <h6/><span class="fa fa-circle"></span> Delivered on   <%=product.order_time%></h6>
                                                 <small><p>Your item has been delivered.</p></small>
                                                 <p class="mt-4">Rate and Review Product</p>
                                             </div>
                                         </div>
-                                        <!-- ordered item 2 -->
-                                        <div class="row mt-4 border-bottom">
-                                            <div class="col-12 col-md-3">
-                                                <img src="/images/2021-09-29T15-19-38.031ZSnapchat-1793318258.jpg" class="rounded" alt="pic">
-                                                <br>
-                                                <br>
-                                            </div>
-                                            <div class="col-12 col-md-3">
-                                                <h6>Item Name</h6>
-                                                <small><p>Item Description</p></small>
-                                                <p>Seller: Anjani</p>
-                                            </div>
-                                            <div class="col-12 col-md-2">
-                                                <h6>Rs. XXXX</h6>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <h6/><span class="fa fa-circle"></span> Delivered on 25/08/21</h6>
-                                                <small><p>Your item has been delivered.</p></small>
-                                                <p class="mt-4">Rate and Review Product</p>
-                                            </div>
-                                        </div>
-    
-    
+            
+                                        <% }); %>
+                                        
+                                    <%}%>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+                       
                         <div class="col-12 col-md-3 mt-4">
                             <div class="card-deck">
                                 <div class="card">

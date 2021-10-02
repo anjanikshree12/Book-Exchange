@@ -337,8 +337,9 @@ exports.postOrder=(req,res,next)=>{
     console.log(books);
     Book.getTotalPrice(books)
     .then(result1=>{
-            const orderAmount=result1[0][0].cost;
-            // console.log(orderAmount);
+            const orderAmount=result1[0][0].selling_cost;
+            console.log(orderAmount);
+            console.log(result1[0]);
             Order.addOrder(user_id,orderAmount)
             .then(result=>{
             const orderId=result[0].insertId;
@@ -377,43 +378,17 @@ exports.getOrders=(req,res,next)=>{
     Order.getOrdersByUserId(req.user.id)
     .then(result=>{
         console.log(result[0]);
-        let orders=[];
-        let curord;
-        let cur=[];
-        for(let i=0;i<result[0].length;i++){
-            // console.log(temp);
-            if(i==0){
-                curord=result[0][i].order_id;
-                cur.push(result[0][i]);
-                if(i==result[0].length-1){
-                    orders.push(cur);
-                    break;
-                }
-            }
-            if(result[0][i].order_id!=curord){
-                console.log('nequal');
-                orders.push(cur);
-                cur=[];
-                cur.push(result[0][i]);
-                curord=result[0][i].order_id;
-
-            }else{
-                console.log('equal');
-                cur.push(result[0][i]);
-            }
-            if(i==result[0].length-1){
-                console.log('end');
-                orders.push(cur);
-            }
-            
-            // console.log(curdate);
-        }
-        console.log(orders)
-        res.render('shop/myorders',{
-            path:'/myorders',
-            orders:orders
+        Book.getOwner(result[0][0].book_id)
+        .then(result1=>{
+            console.log(result1[0]);
+            res.render('shop/myorders',{
+                path:'/myorders',
+                orders:result[0],
+                name:result1[0][0].name
+            })
         })
-        console.log(orders);
+        
+        // console.log(orders);
     })
     .catch(err=>{
         console.log(err);

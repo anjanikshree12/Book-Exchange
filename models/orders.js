@@ -8,7 +8,7 @@ class Order{
     }
 
     static getOrdersByUserId(userId){
-        const command="SELECT orders.id AS order_id,order_time,book_id,title,selling_price FROM orders "
+        const command="SELECT orders.id AS order_id,order_time,book_id,title,selling_price,imageUrl,description FROM orders "
         +"JOIN order_items "
         +"ON orders.id=order_id "
         +"JOIN books "

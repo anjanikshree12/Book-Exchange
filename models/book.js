@@ -115,7 +115,9 @@ class Book{
         return db.execute(command,[userId])
     }
     static getOwner(book_id){
-        const command="SELECT user_id FROM books WHERE id=?";
+        const command="SELECT user_id,concat(firstName,' ',lastName) AS name FROM books "
+        +"JOIN users ON user_id=users.id "
+        +"WHERE books.id=? ;";
         return db.execute(command,[book_id]);
     }
 
