@@ -6,8 +6,8 @@
 .row-content {
     margin:0px auto;
     padding: 50px 0px 50px 0px;
-    border-bottom: 1px ridge;
-    border-top: 1px ridge;
+    /* border-bottom: 1px ridge; */
+    /* border-top: 1px ridge; */
     min-height:65vh;
 }
 .sellbooks{
@@ -41,8 +41,13 @@
     font-family: 'Montserrat', sans-serif;
 } */
 body{
-background: #ffffff;
 font-family: 'Noto Sans', sans-serif;
+/* background-image: url(/images/1.jpg);
+background-color: white;
+background-position: center;
+background-repeat: repeat-y; 
+background-size: cover;
+min-height: 100vh; */
 }
 .nav2{
     margin-top: 9vh;
@@ -56,6 +61,9 @@ font-family: 'Noto Sans', sans-serif;
 .wishlist{
     margin-top: 12vh;
 }
-.myorders{
+.myorders, .mybooks{
+    margin-top: 12vh;
+}
+.sellbooks{
     margin-top: 12vh;
 }

@@ -1,10 +1,6 @@
 <% if (prods.length> 0) { %>
     <div class="booksforsale">
-        <div class="row mt-2">
-            <div class="col text-center">
-                <h3>All Books</h3>
-            </div>
-        </div>
+        
 
         <div class="container">
 
@@ -25,7 +21,7 @@
                                                     <img src="/<%= product.imageUrl %>" class="card-img-top" alt="book"
                                                         style="width: 80%;">
                                                 </div>
-                                                <h5 class="card-title mt-4">
+                                                <h5 class="card-title mt-4" style="font-family: 'Bebas Neue', cursive;font-size:30px">
                                                     <%= product.title %>
                                                 </h5>
                                                 <%if(path!=' /mybooks'){%>
