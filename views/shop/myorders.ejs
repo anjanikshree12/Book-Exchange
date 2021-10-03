@@ -9,114 +9,45 @@
                 <div class="container">
                     <div class="row mt-4">
                         <div class="col-12 col-md-9 mt-4">
-                            <div class="card-deck">
-                                <div class="card">
-                                    <div class="card-header text-center">
-                                        <h5 class="lead">Order History</h5>
-                                    </div>
                                     
-                                    <div class="card-body text-white" style="background: #6d00d3;">
-                                        <!-- card-body -->
+                                        <h6 class="mb-3 text-center align-items-center" style="font-size: 30px;font-family: 'Akronim', cursive;">Orders History</h6>
+                                    
+
+                                    <!-- media list introduced -->
+                                    <ul class="list-unstyled" style="font-family: 'Scheherazade New', serif;">
                                         <%if(orders.length<=0){%>
-                                            <p>Nothing here!</p>
+                                          <p class="lead text-center" style="font-size: 20px;">You haven't ordered anything yet!</p>
                                         <%}else{%>
-                                        <!-- ordered item 1 -->
+                                   
                                         <% orders.forEach(product => { %>
-                                        
-                                        <div class="row mt-4 border-bottom">
-                                            <div class="col-12 col-md-3">
-                                                <img src="<%=product.imageUrl%>" class="rounded" alt="pic">
-                                                <br>
-                                                <br>
-                                            </div>
-                                            <div class="col-12 col-md-3">
-                                                <h6><%= product.title %></h6>
-                                                <small><p><%=product.description%></p></small>
-                                                <p>Seller: <%=name%></p>
-                                            </div>
-                                            <div class="col-12 col-md-2">
+                                      <li class="media border mt-2" style="background: whitesmoke;">
+                                          <img class="ml-4 mt-3 mb-3 border rounded" src="<%=product.imageUrl%>" alt="pic" style="width: 130px;height: 25vh;">
+                                          
+                                        <div class="media-body ml-4 mt-4">
+                                          <h5 style="font-family: 'Bebas Neue', cursive;font-size:25px"><%= product.title %> <br></h5>
+                                            <h5> <small><%=product.description%> <br>
+                                              Seller: <%=name%></small></h5>
+                                                
                                                 <h6>Rs. <%=product.selling_price%></h6>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <h6>Delivered on <%=product.order_time%></h6>
-                                                <small><p>Your item has been delivered.</p></small>
-                                                <div class="rating" 
-                                                style="body {
-                                                    height: 100vh;
-                                                    display: grid;
-                                                    place-items: center;
-                                                    overflow: hidden;
-                                                 }
-                                                 
-                                                 .rating {
-                                                    position: relative;
-                                                    width: 180px;
-                                                    background: transparent;
-                                                    display: flex;
-                                                    justify-content: center;
-                                                    align-items: center;
-                                                    gap: .3em;
-                                                    padding: 5px;
-                                                    overflow: hidden;
-                                                    border-radius: 20px;
-                                                    box-shadow: 0 0 2px #b3acac;
-                                                 }
-                                                 
-                                                 .rating__result {
-                                                    position: absolute;
-                                                    top: 0;
-                                                    left: 0;
-                                                    transform: translateY(-10px) translateX(-5px);
-                                                    z-index: -9;
-                                                    font: 3em Arial, Helvetica, sans-serif;
-                                                    color: #ebebeb8e;
-                                                    pointer-events: none;
-                                                 }
-                                                 
-                                                 .rating__star {
-                                                    font-size: 1.3em;
-                                                    cursor: pointer;
-                                                    color: #dabd18b2;
-                                                    transition: filter linear .3s;
-                                                 }
-                                                 
-                                                 .rating__star:hover {
-                                                    filter: drop-shadow(1px 1px 4px gold);
-                                                 }">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <h6>Rate: <span class="rating__result"></span></h6> 
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <i class="rating__star fa fa-star-o"></i>
-                                                            <i class="rating__star fa fa-star-o"></i>
-                                                            <i class="rating__star fa fa-star-o"></i>
-                                                            <i class="rating__star fa fa-star-o"></i>
-                                                            <i class="rating__star fa fa-star-o"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <h6>Delivered on <%=product.order_time%> <br> <small>
+                                                  Your item has been delivered
+                                                </small> .</h6>
+                                                
+                                          
                                         </div>
-            
-                                        <% }); %>
+                                      </li>   
+                                      <% }); %>
                                         
                                     <%}%>
-
-                                    </div>
-                                </div>
-                            </div>
+                                    </ul>
                         </div>
-                       
                         <div class="col-12 col-md-3 mt-4">
-                            <div class="card-deck">
+                            
                                 <div class="card">
-                                    <div class="card-header text-center">
-                                        <h5 class="lead">My Addresses</h5>
+                                    <div class="mt-2 text-center border-bottom">
+                                        <h5 style="font-size: 28px;font-family: 'Akronim', cursive;">My Addresses</h5>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body" style="font-size: 12px;">
                                         <%addresses.forEach((address,i)=>{%>
                                             <%if(address.default_add==1){%>
                                             <h6>Default Address: </h6>
@@ -126,8 +57,6 @@
                                             <p><%=address.locality%> , <%=address.city%>, <%=address.district%>  <%=address.state%> - <%=address.pin_code%></p>
                             
                                         <%})%>
-                                        
-                                        
                                         <button type="button" class="bg-primary text-white rounded" data-toggle="modal" data-target="#addaddressModal"><span class="fa fa-plus"></span> Add Address</button>
                                         <!-- modal for addd adress -->
                                           <!-- Modal -->
@@ -141,8 +70,6 @@
                                                   </button>
                                                 </div>
                                                 <div class="modal-body" style="background-color: teal;color: white;">
-                                                 
-                                                    
                                                         <form action="/addAddress" method="POST">
                                                             <div class="form-group">
                                                               <label for="inputAddress">Address</label>
@@ -218,7 +145,6 @@
                                                           <div class="col">
                                                             <button type="button" class="form-control badge badge-pill badge-info"><span class="fa fa-building"></span> Other</button>
                                                           </div>
-                                                          
                                                         </div>
                                                       </div>
                                                     </div>
@@ -235,10 +161,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        
                     </div>
                 </div>
-
                     <!-- myorders css and container divs -->
                 </div>
             </div>

@@ -7,12 +7,12 @@
 
             <div class="sellbooks">
                 <div class="container">
-                    <div class="row mt-4">
-                        <div class="col text-center mt-4">
-                            <p class="lead">Sell Books</p>
+                    <div class="row">
+                        <div class="col">
+                            <h6 class="mb-3 text-center align-items-center" style="font-size: 30px;font-family: 'Akronim', cursive;">Sell Books</h6>
                         </div>
                     </div>
-                    <div class="row row-content mt-4 d-flex justify-content-center">
+                    <div class="row-content mt-4 d-flex justify-content-center border">
                         <div class="col-10 col-md-12">
                             <form <%if(path=='/editBook'){%> action="/editBook/<%=id%>" <%}else{%>  action="/addBook" <%}%> method="POST" enctype="multipart/form-data">
                                 <div class="form-row">
@@ -73,8 +73,6 @@
                                             <option>Bad</option>
                                         </select>
                                     </div>
-
-
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
@@ -95,15 +93,15 @@
                                 <div class="form-row">
                                     <div class="col-md-12 mb-3">
                                         <label for="textarea">About the book</label>
-                                        <textarea type="text" name="description" id="about" class="form-control"
-                                            cols="200" rows="4"
-                                            placeholder="Comment about the content of the book"    > <%if(path=='/editBook'){%> <%=descr%><%}%></textarea>
+                                        <input type="text" name="description" id="about" class="form-control"
+                                           
+                                            value="No Description Provided." > <%if(path=='/editBook'){%> <%=descr%><%}%>
                                     </div>
                                 </div>
                                 <%if(path=='/editBook'){%>
                                 <input type="hidden" name="id" value="<%=id%>">
                                 <%}%>
-                                <div class="row-header">
+                                <div class="row-header mt-3">
                                     <div class="col text-center">
                                         <button type="submit" class="btn btn-success">Upload</button>
                                     </div>
