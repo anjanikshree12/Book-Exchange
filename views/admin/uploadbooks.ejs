@@ -77,12 +77,12 @@
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
                                         <label for="mrpprice">MRP</label>
-                                        <input name="orignal_price" type="number" class="form-control" " id=" mrpprice"
+                                        <input name="orignal_price" step="0.01" type="number" class="form-control" " id=" mrpprice"
                                             placeholder="MRP"   <%if(path=='/editBook'){%> value="<%=op%>"<%}%> required>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="spprice">Selling Price</label>
-                                        <input type="number" class="form-control" name="selling_price" id="spprice"
+                                        <input type="number"  step="0.01" class="form-control" name="selling_price" id="spprice"
                                             placeholder="Selling Price"  <%if(path=='/editBook'){%> value="<%=sp%>"<%}%> required>
                                     </div>
                                     <div class="col-md-4 mb-3">
