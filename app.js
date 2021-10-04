@@ -12,14 +12,20 @@ const Cart=require('./models/cart')
 const  MySQLStore = require('express-mysql-session')(session);
 const path=require('path');
 const multer=require('multer');
+const cloudinary = require('cloudinary').v2;
+const morgan=require('morgan')
 
 console.log(__dirname + '/node_modules');
+cloudinary.config({ 
+    cloud_name: 'bookexchange', 
+    api_key: '251961729382725', 
+    api_secret: 'LAdFwP6Jsr--s0K4JZJhy_C3qTY' 
+  });
 
-
+  app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(express.static(__dirname + '/public'));
 // app.use(express.static(__dirname +'/node_modules'));
-app.use(express.static(path.join(__dirname, 'node_modules')));
-
+app.use(morgan('dev'));
 // path.dirname(process.mainModule.filename);
 const sessionStore = new MySQLStore({
     createDatabaseTable: true,
