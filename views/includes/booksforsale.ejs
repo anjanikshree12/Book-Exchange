@@ -6,7 +6,7 @@
 
             <%let count=0;%>
                 <% for (let product of prods) { %>
-                    <%if(product.available==0){continue}%>
+                    <%if(product.available==0&&path!='/mybooks'){console.log(path); continue }%>
                         <%if(count%4==0){%>
                             <div class="row mt-2 mx-auto">
                                 <div class="card-deck">
@@ -51,7 +51,7 @@
                                                         </p>
                                                     </section>
                                                     <%}else{%>
-                                                        <p>this item was sold for: <%=product.price%>
+                                                        <p>this item was sold for: <%=product.selling_price%>
                                                         </p>
                                                         <%}%>
 
@@ -81,7 +81,7 @@
                                                                     </form>
                                                                 </div>
 
-                                                                <%}else if(path=='/mybooks' ){%>
+                                                                <%}else if(path=='/mybooks' &&product.available==1){%>
                                                                     <form action="/deleteBook" method="POST">
                                                                         <input type="hidden" name="id"
                                                                             value="<%=product.id%>">

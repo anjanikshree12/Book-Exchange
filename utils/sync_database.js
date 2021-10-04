@@ -48,12 +48,28 @@ const wishlistTable="CREATE TABLE IF NOT EXISTS `wishlist`("
     +"FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE);"
 
 
+    
+const addressTable="CREATE TABLE IF NOT EXISTS `addresses`("
++"`id` INT PRIMARY KEY AUTO_INCREMENT, "
++"`user_id` INT NOT NULL, "
++"`locality` VARCHAR(255) NOT NULL, "
++"`city` VARCHAR(100) NOT NULL, "
++"`state` VARCHAR(100) NOT NULL, "
++"`pin_code` VARCHAR(20) NOT NULL, "
++"`type` VARCHAR(50) NOT NULL, "
++"`district` VARCHAR(50) NOT NULL, "
++"`default_add` TINYINT(1)  DEFAULT 0, "
++"FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE); "
+
+
 
 const orderTable="CREATE TABLE IF NOT EXISTS `orders`("
     +"`id` INT PRIMARY KEY AUTO_INCREMENT, "
     +"`user_id` INT NOT NULL, "
     +"`order_amount` DECIMAL(7,2) NOT NULL, "
     +"`order_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+    +"`deliver_id` INT, "
+    +"FOREIGN KEY (deliver_id) REFERENCES addresses(id), "
     +"FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE);"
 
 
@@ -64,17 +80,6 @@ const orderItemsTable="CREATE TABLE IF NOT EXISTS `order_items`("
     +"FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE, "
     +"FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE); "
 
-const addressTable="CREATE TABLE IF NOT EXISTS `addresses`("
-                +"`id` INT PRIMARY KEY AUTO_INCREMENT, "
-                +"`user_id` INT NOT NULL, "
-                +"`locality` VARCHAR(255) NOT NULL, "
-                +"`city` VARCHAR(100) NOT NULL, "
-                +"`state` VARCHAR(100) NOT NULL, "
-                +"`pin_code` VARCHAR(20) NOT NULL, "
-                +"`type` VARCHAR(50) NOT NULL, "
-                +"`district` VARCHAR(50) NOT NULL, "
-                +"`default_add` TINYINT(1)  DEFAULT 0, "
-                +"FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE); "
 
     exports.sync = async () => {
         try {
