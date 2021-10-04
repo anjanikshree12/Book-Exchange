@@ -20,11 +20,7 @@
                                             </div>
                                             <div class="col-6 col-md-10" style="display:flex;justify-content: right;">
                                                 <h5 class="mr-3" style="font-size: 28px;font-family: 'Akronim', cursive;">Delivery Location</h5>
-                                                <select name="address" class="custom-select col-md-6" required>
-                                                    <%addresses.forEach((address,i)=>{%>
-                                                    <option <%if(address.default_add==1)%>selected  > <%if(address.default_add==1){%> Default Address -<%}else{%>Selected Address -<%}%> <%=address.pin_code%> </option>
-                                                    <%})%>
-                                                </select>
+                                               
                                             </div>
                                             
                                         </div>
@@ -44,7 +40,7 @@
                                             </strike> <br>
                                                 <%=product.sale%>% off
                                              </p>
-                                            <form action="/removeFromCart" method="POST">
+                                            <form action="/removeFromCart" method="POST"></form>
                                                 <input type="hidden" name="bookId" value="<%=product.id%>">
                                                 <button type="submit"
                                                     class="mb-3 border rounded bg-danger text-white"><span
@@ -74,7 +70,7 @@
                                             <div class="col-5 col-md-5">
                                                 <h6>&#8377 <%=orignal_cost%>
                                                 </h6>
-                                                <h6>&#8377 -<%=orignal_cost-selling_cost%>
+                                                <h6>&#8377 -<%=saving%>
                                                 </h6>
                                                 <h6>FREE</h6>
                                             </div>
@@ -91,7 +87,7 @@
                                         </div>
                                         <div class="row m-1">
                                             <div class="col-12 col-md-12">
-                                                <h6>You'll save &#8377 <%=orignal_cost-selling_cost%> on this order!
+                                                <h6>You'll save &#8377 <%=saving%> on this order!
                                                 </h6>
                                             </div>
                                         </div>
@@ -101,6 +97,11 @@
                                         <div class="row">
                                             <div class="col-12 col-md-12  d-flex justify-content-end">
                                                 <form action="/order" method="POST">
+                                                    <select name="address" class="custom-select col-md-6" id="address" required>
+                                                        <%addresses.forEach((address,i)=>{%>
+                                                        <option <%if(address.default_add==1)%>selected  value="<%=address.id%>" > <%if(address.default_add==1){%> Default Address -<%}else{%>Selected Address -<%}%> <%=address.pin_code%> </option>
+                                                        <%})%>
+                                                    </select>
                                                     <%console.log(books)%>
                                                     <input type="hidden" name="bookIds" value="<%=books%>">
                                                     <button type="submit"

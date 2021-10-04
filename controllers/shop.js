@@ -266,13 +266,16 @@ exports.getCart=(req,res,next)=>{
             .then(result1=>{
                 console.log(bookIds);
                 // console.log(result[0]);
+                let saving=result1[0][0].orignal_cost-result1[0][0].selling_cost;
+                saving=saving.toFixed(2);
+                console.log(saving);
                 console.log(result1[0].length);
                 return res.render('shop/cart2',{
                     prods:result[0],
                     path:'/cart',
                     orignal_cost:result1[0][0].orignal_cost,
                     selling_cost:result1[0][0].selling_cost,
-                    saving:result1[0][0].orignal_cost-result1[0][0].selling_cost,
+                    saving:saving,
                     books:bookIds,
                     addresses:result3[0]
                 })
@@ -327,6 +330,8 @@ exports.removeFromWishlist=(req,res,next)=>{
 exports.postOrder=(req,res,next)=>{
     const user_id=req.user.id;
     const bookIds=req.body.bookIds;
+    const deliver_id=req.body.address;
+    // console.log(req.body);
     let books=[];
     console.log(req.body);
     let cur="";
@@ -346,9 +351,10 @@ exports.postOrder=(req,res,next)=>{
     Book.getTotalPrice(books)
     .then(result1=>{
             const orderAmount=result1[0][0].selling_cost;
+            console.log(deliver_id);
             console.log(orderAmount);
             console.log(result1[0]);
-            Order.addOrder(user_id,orderAmount)
+            Order.addOrder(user_id,orderAmount,deliver_id)
             .then(result=>{
             const orderId=result[0].insertId;
             
