@@ -16,7 +16,7 @@ class Book{
     }
 
     addBook(){
-        const command="INSERT INTO BOOKS(title,orignal_price,selling_price,genre,language,author_id,user_id,imageUrl,description,bcondition) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        const command="INSERT INTO books(title,orignal_price,selling_price,genre,language,author_id,user_id,imageUrl,description,bcondition) VALUES(?,?,?,?,?,?,?,?,?,?)";
         return db.query(command,[this.title,this.orignal_price,this.selling_price,this.genre,this.language,this.author_id,this.user_id,this.imageUrl,this.description,this.condition]);
     }
 
@@ -76,7 +76,7 @@ class Book{
         return db.execute(command,[genre]);
     }
 
-    static getBooksbyLanguage(language,orderByPrice,userId){
+    static getbooksbyLanguage(language,orderByPrice,userId){
         let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books where language=?  AND available=1 ";
      
     if(orderByPrice=='true'){
@@ -107,8 +107,8 @@ class Book{
         return db.query(command,[books]);
     }
     
-    static getAllBooks(orderBy,userId){
-        const command="SELECT *,books.id as id,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM BOOKS JOIN AUTHORS ON books.author_id=authorS.id  WHERE AVAILABLE=1 AND user_id!=?";
+    static getAllbooks(orderBy,userId){
+        const command="SELECT *,books.id as id,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books JOIN authors ON books.author_id=authors.id  WHERE AVAILABLE=1 AND user_id!=?";
         if(orderBy=='true'){
             command+=' ORDER BY orignal_price';
         }
@@ -137,7 +137,7 @@ class Book{
     }
     
     static editBookByid(id,title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl,description,bcondition){
-        const command="UPDATE BOOKS SET title=?,orignal_price=?,selling_price=?,user_id=?,genre=?,language=?,author_id=?,imageUrl=?,description=?,bcondition=? WHERE books.id=?;  "
+        const command="UPDATE books SET title=?,orignal_price=?,selling_price=?,user_id=?,genre=?,language=?,author_id=?,imageUrl=?,description=?,bcondition=? WHERE books.id=?;  "
         return db.query(command,[title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl,description,bcondition,id]);
     }
 }

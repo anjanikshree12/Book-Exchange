@@ -32,7 +32,7 @@ class Cart{
     }
 
     static getCartNum(userId){
-        let command="SELECT COUNT(*) as n FROM CART WHERE user_id=?";
+        let command="SELECT COUNT(*) as n FROM cart WHERE user_id=?";
         return db.execute(command,[userId]);
     }
 }
