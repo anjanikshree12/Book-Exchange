@@ -111,7 +111,7 @@ exports.getBooksByLanguage=(req,res,next)=>{
     const userId=req.user.id;
     Book.getBooksbyLanguage(language,orderBy,userId)
     .then(result=>{
-        res.render('auth/index',{
+        res.render('auth/loggedin',{
             prods:result[0],
             path:'/langugeBook/'+language
         })
