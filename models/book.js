@@ -122,7 +122,7 @@ class Book{
     }
 
     static getBookDetailsById(id){
-        const command="SELECT books.id AS book_id,books.title AS title,books.language AS language,books.selling_price AS sp,books.orignal_price AS op,users.id AS user_id,users.city AS city,books.description AS descr FROM books " 
+        const command="SELECT books.id AS book_id,books.title AS title,books.language AS language,books.selling_price AS sp,books.orignal_price AS op,users.id AS user_id,books.description AS descr,imageUrl FROM books " 
         +"JOIN users "
         +"ON users.id=books.user_id "
         +"WHERE books.id=?";
