@@ -90,9 +90,9 @@ const orderItemsTable="CREATE TABLE IF NOT EXISTS `order_items`("
             await db.execute(bookTable);
             await db.execute(cartTable);
             await db.execute(wishlistTable);
+            await db.execute(addressTable);
             await db.execute(orderTable);
             await db.execute(orderItemsTable);
-            await db.execute(addressTable);
         } catch (err) {
             console.log(err);
         }
