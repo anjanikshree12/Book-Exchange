@@ -14,9 +14,16 @@ const path=require('path');
 const multer=require('multer');
 const cloudinary = require('cloudinary').v2;
 const morgan=require('morgan')
+require('dotenv').config();
+
+
 
 console.log(__dirname + '/node_modules');
-
+cloudinary.config({ 
+    cloud_name:process.env.CLOUDINARY_CLOUD_NAME , 
+    api_key:process.env.CLOUDINARY_API_KEY , 
+    api_secret:process.env.CLOUDINARY_API_SECRET  
+  });
 
   app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(express.static(__dirname + '/public'));
