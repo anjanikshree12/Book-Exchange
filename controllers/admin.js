@@ -3,6 +3,8 @@ const Author=require('../models/author');
 const Cart=require('../models/cart');
 const User = require('../models/user');
 const Address=require('../models/address')
+
+
 exports.getAddBook=(req,res,next)=>{
     // console.log(req.user.id);
     res.render('admin/uploadbooks',{
@@ -18,7 +20,7 @@ exports.getEditBook=(req,res,next)=>{
     .then(result=>{
         const owner_id=result[0][0].user_id;
         if(owner_id!=userId){
-            res.redirect('/mybooks')
+            return res.redirect('/mybooks')
         }
         Book.getBookDetails(bookId)
         .then(result2=>{
