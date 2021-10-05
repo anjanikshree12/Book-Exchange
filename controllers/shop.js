@@ -98,7 +98,7 @@ exports.getBooksByGenre=(req,res,next)=>{
     Book.getBookByGenre(genre,orderBy,userId)
     .then(result=>{
         console.log(result[0]);
-        res.render('auth/index',{
+        res.render('auth/loggedin',{
             prods:result[0],
             path:'/genreBook/'+genre
         })
