@@ -1,5 +1,7 @@
 const mysql = require('mysql2');
+
 require('dotenv').config();
+
 
 
 
@@ -12,6 +14,9 @@ const pool = mysql.createPool({
     user: 'root',
     database: 'booksite',
     password:process.env.MYSQL_PASSWORD
+
+    
+
 });
 
 module.exports = pool.promise();
