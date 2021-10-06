@@ -41,10 +41,11 @@
                                              </p>
                                             <form action="/removeFromCart" method="POST">
                                                 <input type="hidden" name="bookId" value="<%=product.id%>">
-                                                <button type="submit"
-                                                    class="mb-3 border rounded bg-danger text-white"><span
-                                                        class="fa fa-trash"></span> Remove from cart </button>
+                                                <button type="submit" class="bg-danger btn-lg text-white">
+                                                    <span class="fa fa-trash"></span> 
+                                                </button>
                                             </form>
+                                            <br>
                                           </div>
                                         </li>   
                                         <% } %>

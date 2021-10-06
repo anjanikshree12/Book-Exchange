@@ -8,11 +8,12 @@
                 <% for (let product of prods) { %>
                     <%if(product.available==0&&path!='/mybooks'){console.log(path); continue }%>
                         <%if(count%4==0){%>
-                            <div class="row mt-2 mx-auto">
+                            <div class="row mt-2">
                                 <div class="card-deck">
                                     <%}%>
+                                    <div class="col-auto col-md-3 mb-3">
                                         <div class="card h-100 mt-4 text-center border-primary rounded"
-                                            style="width: 18rem;">
+                                        style="width: 16rem; height: 15rem;">
                                             <!-- <div class="card-header" style="background-color: #e3f2fd;">
                                                
                                             </div> -->
@@ -51,8 +52,10 @@
                                                         </p>
                                                     </section>
                                                     <%}else{%>
-                                                        <p>this item was sold for: <%=product.selling_price%>
-                                                        </p>
+                                                        
+                                                        <hr>
+                                                        <p>This item was sold for: <br> &#8377 <%=product.selling_price%> </p>
+                                                        <hr>
                                                         <%}%>
 
                                                             <%if(userId!=product.user_id){%>
@@ -64,7 +67,7 @@
                                                                                 value="<%= product.id %>" name="bookId">
                                                                             <input type="hidden" value="<%=path%>"
                                                                                 name="path">
-                                                                            <button type='submit' class="btn btn-lg border-success">
+                                                                            <button type='submit' class="btn btn-lg btn-light border-primary" style="color: blue;">
                                                                                     <span
                                                                                         class="fa fa-cart-plus"></span></button>
                                                                         </div>
@@ -75,23 +78,33 @@
                                                                                 value="<%= product.id %>" name="bookId">
                                                                             <input type="hidden" value="<%=path%>"
                                                                                 name="path">
-                                                                            <button type="submit" class="btn btn-lg border-success">
+                                                                            <button type="submit" class="btn btn-lg btn-light border-danger" style="color: rgb(216, 37, 37);">
                                                                                     <span class="fa fa-heart"></span></button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
 
                                                                 <%}else if(path=='/mybooks' &&product.available==1){%>
-                                                                    <form action="/deleteBook" method="POST">
-                                                                        <input type="hidden" name="id"
-                                                                            value="<%=product.id%>">
-                                                                        <button type="submit">delete Book</button>
-                                                                    </form>
-                                                                    <a href="/editBook/<%=product.id%>">edit book</a>
+                                                                    <div class="row d-flex justify-content-around">
+                                                                        <div class="col">
+                                                                            <form action="/deleteBook" method="POST">
+                                                                                <input type="hidden" name="id"
+                                                                                    value="<%=product.id%>">
+                                                                                <button type="submit" class=" btn-danger rounded btn-lg"><span class="fa fa-remove"></span></button>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <a href="/editBook/<%=product.id%>">
+                                                                                <button type="submit" class=" btn-warning rounded btn-lg"> <span class="fa fa-edit"></span>
+                                                                                </button>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
                                                                     <%}%>
                                                                 
 
                                             </div>
+                                        </div>
                                         </div>
                                         <%if((count+1)%4==0&&(count>2)){%>
                                 </div>
@@ -108,7 +121,7 @@
             <div class="row">
                 <div class="col-12 col-md-12">
                     <h1 class="text-center">No Products Found!</h1>
-                    <p>Products will be added soon, see you later !</p>
+                    <p class="text-center">Products will be added soon, see you later !</p>
                 </div>
             </div>
             <% } %>
