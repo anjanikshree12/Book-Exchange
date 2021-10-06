@@ -1,111 +1,130 @@
 <% if (prods.length> 0) { %>
     <div class="booksforsale">
-        
+
 
         <div class="container">
 
             <%let count=0;%>
                 <% for (let product of prods) { %>
-                    <%if(product.available==0&&path!='/mybooks'){console.log(path); continue }%>
+                    <%if(product.available==0&&path!=' /mybooks'){console.log(path); continue }%>
                         <%if(count%4==0){%>
                             <div class="row mt-2">
                                 <div class="card-deck">
                                     <%}%>
-                                    <div class="col-auto col-md-3 mb-3">
-                                        <div class="card h-100 mt-4 text-center border-primary rounded"
-                                        style="width: 16rem; height: 15rem;">
-                                            <!-- <div class="card-header" style="background-color: #e3f2fd;">
-                                               
-                                            </div> -->
-                                            <div class="card-body">
-                                                <div class="col">
-                                                    <img src="<%= product.imageUrl %>" class="card-img-top" alt="book"
-                                                        style="width: 80%;">
+                                        
+                                            <div class="card h-80 mt-4 text-center border-primary rounded"
+                                                style="width: 16rem;">
+                                            
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <img src="<%= product.imageUrl %>" class="card-img-top"
+                                                                alt="book" style="width: 60%;height: 160px;">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <h5 class="card-title mt-4"
+                                                                style="font-family: 'Bebas Neue', cursive;font-size:30px">
+                                                                <%= product.title %>
+                                                            </h5>
+                                                            <%if(path!=' /mybooks'){%>
+                                                                <small>
+                                                                    <p>by <%= product.name %>
+                                                                    </p>
+                                                                </small>
+                                                                <%}%>
+                                                                    <p class="card-text">
+                                                                        <%= product.description %>
+                                                                    </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <h5 class="card-title mt-4" style="font-family: 'Bebas Neue', cursive;font-size:30px">
-                                                    <%= product.title %>
-                                                </h5>
-                                                <%if(path!=' /mybooks'){%>
+                                                <div class="card-footer" style="background: white;">
                                                     <small>
-                                                        <p>by <%= product.name %>
+                                                        <p>Condition : <%= product.bcondition %>
                                                         </p>
                                                     </small>
-                                                    <%}%>
-                                                        <p class="card-text">
-                                                            <%= product.description %>
-                                                        </p>
+                                                    <%if(product.available==1){%>
+                                                        <section class="d-flex justify-content-around">
+                                                            <p>&#8377 <strike>
+                                                                    <%= product.orignal_price %>
+                                                                </strike></p>
+                                                            <p> &#8377 <%= product.selling_price %> <small>
+                                                                        <%=product.sale%>% off
+                                                                    </small>
+                                                            </p>
+                                                        </section>
+                                                        <%}else{%>
 
-                                            </div>
-                                            <div class="card-footer" style="background: white;">
-                                                <small>
-                                                    <p>Condition : <%= product.bcondition %>
-                                                    </p>
-                                                </small>
-                                                <%if(product.available==1){%>
-                                                    <section class="d-flex justify-content-around">
-                                                        <p>&#8377 <strike>
-                                                                <%= product.orignal_price %>
-                                                            </strike></p>
-                                                        <p> &#8377 <%= product.selling_price %> <small>
-                                                                    <%=product.sale%>% off
-                                                                </small>
-                                                        </p>
-                                                    </section>
-                                                    <%}else{%>
-                                                        
-                                                        <hr>
-                                                        <p>This item was sold for: <br> &#8377 <%=product.selling_price%> </p>
-                                                        <hr>
-                                                        <%}%>
+                                                            <hr>
+                                                            <p>This item was sold for: <br> &#8377
+                                                                <%=product.selling_price%>
+                                                            </p>
+                                                            <hr>
+                                                            <%}%>
 
-                                                            <%if(userId!=product.user_id){%>
-                                                                <div class="row d-flex justify-content-around">
-                                                                    <form action="/addToCart" method="post">
-                                                                        <div class="col-6 col-md-6">
+                                                                <%if(userId!=product.user_id){%>
+                                                                    <div class="row d-flex justify-content-around">
+                                                                        <form action="/addToCart" method="post">
+                                                                            <div class="col-6 col-md-6">
 
-                                                                            <input type="hidden"
-                                                                                value="<%= product.id %>" name="bookId">
-                                                                            <input type="hidden" value="<%=path%>"
-                                                                                name="path">
-                                                                            <button type='submit' class="btn btn-lg btn-light border-primary" style="color: blue;">
+                                                                                <input type="hidden"
+                                                                                    value="<%= product.id %>"
+                                                                                    name="bookId">
+                                                                                <input type="hidden" value="<%=path%>"
+                                                                                    name="path">
+                                                                                <button type='submit'
+                                                                                    class="btn btn-lg btn-light border-primary"
+                                                                                    style="color: blue;">
                                                                                     <span
                                                                                         class="fa fa-cart-plus"></span></button>
-                                                                        </div>
-                                                                    </form>
-                                                                    <form action="/addToWishlist" method="post">
-                                                                        <div class="col-6 col-md-6">
-                                                                            <input type="hidden"
-                                                                                value="<%= product.id %>" name="bookId">
-                                                                            <input type="hidden" value="<%=path%>"
-                                                                                name="path">
-                                                                            <button type="submit" class="btn btn-lg btn-light border-danger" style="color: rgb(216, 37, 37);">
-                                                                                    <span class="fa fa-heart"></span></button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-
-                                                                <%}else if(path=='/mybooks' &&product.available==1){%>
-                                                                    <div class="row d-flex justify-content-around">
-                                                                        <div class="col">
-                                                                            <form action="/deleteBook" method="POST">
-                                                                                <input type="hidden" name="id"
-                                                                                    value="<%=product.id%>">
-                                                                                <button type="submit" class=" btn-danger rounded btn-lg"><span class="fa fa-remove"></span></button>
-                                                                            </form>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <a href="/editBook/<%=product.id%>">
-                                                                                <button type="submit" class=" btn-warning rounded btn-lg"> <span class="fa fa-edit"></span>
-                                                                                </button>
-                                                                            </a>
-                                                                        </div>
+                                                                            </div>
+                                                                        </form>
+                                                                        <form action="/addToWishlist" method="post">
+                                                                            <div class="col-6 col-md-6">
+                                                                                <input type="hidden"
+                                                                                    value="<%= product.id %>"
+                                                                                    name="bookId">
+                                                                                <input type="hidden" value="<%=path%>"
+                                                                                    name="path">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-lg btn-light border-danger"
+                                                                                    style="color: rgb(216, 37, 37);">
+                                                                                    <span
+                                                                                        class="fa fa-heart"></span></button>
+                                                                            </div>
+                                                                        </form>
                                                                     </div>
-                                                                    <%}%>
-                                                                
 
+                                                                    <%}else if(path=='/mybooks'
+                                                                        &&product.available==1){%>
+                                                                        <div class="row d-flex justify-content-around">
+                                                                            <div class="col">
+                                                                                <form action="/deleteBook"
+                                                                                    method="POST">
+                                                                                    <input type="hidden" name="id"
+                                                                                        value="<%=product.id%>">
+                                                                                    <button type="submit"
+                                                                                        class=" btn-danger rounded btn-lg"><span
+                                                                                            class="fa fa-remove"></span></button>
+                                                                                </form>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <a href="/editBook/<%=product.id%>">
+                                                                                    <button type="submit"
+                                                                                        class=" btn-warning rounded btn-lg">
+                                                                                        <span class="fa fa-edit"></span>
+                                                                                    </button>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <%}%>
+
+
+                                                </div>
                                             </div>
-                                        </div>
-                                        </div>
+                                       
                                         <%if((count+1)%4==0&&(count>2)){%>
                                 </div>
                             </div>
@@ -127,5 +146,5 @@
             <% } %>
                 <!-- // -->
 
-        
+
                 </div>
