@@ -29,6 +29,10 @@ class Wishlist{
         let command="DELETE FROM wishlist WHERE user_id=?";
         return db.execute(command,[userId]);
     }
+    static getWishlistNum(userId){
+        let command="SELECT COUNT(*) as n FROM wishlist WHERE user_id=?";
+        return db.execute(command,[userId]);
+    }
 }
 
 module.exports=Wishlist;
