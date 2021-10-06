@@ -9,7 +9,7 @@ class Cart{
     }
 
     checkIfExists(){
-        const command="SELECT * FROM CART WHERE (book_id=? AND user_id=?)";
+        const command="SELECT * FROM cart WHERE (book_id=? AND user_id=?)";
         return db.execute(command,[this.bookId,this.userId]);
 
     }
