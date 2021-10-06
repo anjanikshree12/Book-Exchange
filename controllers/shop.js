@@ -141,7 +141,7 @@ exports.addToWishlist=(req,res,next)=>{
                 return wishlist.addToWishlist()
                 .then(result=>{
                     console.log('added to wishlist');
-                    res.redirect('/wishlist');
+                    res.redirect('/');
                 })
             }
             console.log(result);
@@ -226,7 +226,7 @@ exports.addToCart=(req,res,next)=>{
                 return cart.addToCart()
                 .then(result=>{
                     console.log('added to cart');
-                    res.redirect('/cart');
+                    res.redirect('/');
                 })
             }
             console.log(result);

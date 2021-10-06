@@ -13,7 +13,8 @@ const  MySQLStore = require('express-mysql-session')(session);
 const path=require('path');
 const multer=require('multer');
 const cloudinary = require('cloudinary').v2;
-const morgan=require('morgan')
+const morgan=require('morgan');
+const Wishlist = require('./models/wishlist');
 require('dotenv').config();
 
 
@@ -94,10 +95,18 @@ app.use((req, res, next) => {
     if(req.user){
         Cart.getCartNum(req.user.id).then(result=>{
             res.locals.cartnum=result[0][0].n;
+            Wishlist.getWishlistNum(req.user.id).then(result1=>{
+                console.log(result1[0]);
+                res.locals.wishlistNum=result1[0][0].n;
+            })
+            .catch(err=>{
+                console.log(err);
+            })
             next()
         }).catch(err=>{
             console.log(err);
         })
+
     }else
     next();
   });
