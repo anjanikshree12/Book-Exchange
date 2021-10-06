@@ -98,11 +98,12 @@ app.use((req, res, next) => {
             Wishlist.getWishlistNum(req.user.id).then(result1=>{
                 console.log(result1[0]);
                 res.locals.wishlistNum=result1[0][0].n;
+                next()
             })
             .catch(err=>{
                 console.log(err);
             })
-            next()
+           
         }).catch(err=>{
             console.log(err);
         })
