@@ -37,6 +37,7 @@
                                                                         </small> </h6>
                                                                 <div class="row">
                                                                     <div class="col d-flex justify-content-left">
+                                                                        <%if(product.available==1){%>
                                                                         <form action="/addToCart" method="post">
         
         
@@ -47,6 +48,9 @@
                                                                             class="mt-4 btn btn-lg btn-primary text-white"><span
                                                                                     class="fa fa-cart-plus"></span></button>
                                                                         </form>
+                                                                        <%}else{%>
+                                                                            <p>this product has been sold</p>
+                                                                            <%}%>
         
         
                                                                         <form action="/removeFromWishlist" method="POST">
