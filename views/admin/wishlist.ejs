@@ -27,12 +27,12 @@
                                                     <div class="col-5 col-md-7">
                                                         <div class="row mt-4">
                                                             <div class="col-12 col-md-12">
-                                                                <h6 style="font-family: 'Bebas Neue', cursive;font-size:28px">
+                                                                <h6 style="font-family: 'Noto Sans Display', sans-serif;font-size:25px">
                                                                     <%= product.title %>
                                                                 </h6>
                                                                 
-                                                                <h6>&#8377 <%= product.orignal_price %> <strike>&#8377 <%=
-                                                                                product.selling_price %></strike> <small>
+                                                                <h6>&#8377 <%= product.orignal_price %> <br> <strike>&#8377 <%=
+                                                                                product.selling_price %></strike> <br> <small>
                                                                             <%=product.sale%> off
                                                                         </small> </h6>
                                                                 <div class="row">
@@ -49,7 +49,7 @@
                                                                                     class="fa fa-cart-plus"></span></button>
                                                                         </form>
                                                                         <%}else{%>
-                                                                            <p>this product has been sold</p>
+                                                                            <p>Sold Out</p>
                                                                             <%}%>
         
         
