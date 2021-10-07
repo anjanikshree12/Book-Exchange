@@ -100,7 +100,7 @@ exports.getBooksByGenre=(req,res,next)=>{
         console.log(result[0]);
         res.render('auth/loggedin',{
             prods:result[0],
-            path:'/genreBook/'+genre
+            path:'/genreBook'
         })
     })
 }
@@ -113,7 +113,7 @@ exports.getBooksByLanguage=(req,res,next)=>{
     .then(result=>{
         res.render('auth/loggedin',{
             prods:result[0],
-            path:'/langugeBook/'+language
+            path:'/langugeBook'
         })
     })
 }
