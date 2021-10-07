@@ -33,6 +33,7 @@ class Wishlist{
         let command="SELECT COUNT(*) as n FROM wishlist WHERE user_id=?";
         return db.execute(command,[userId]);
     }
+
 }
 
 module.exports=Wishlist;

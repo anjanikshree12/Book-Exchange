@@ -157,6 +157,7 @@ exports.getWishlist=(req,res,next)=>{
     const userId=req.user.id;
     const orderBy=req.query.orderBy;
     console.log(orderBy);
+    
     Wishlist.getWishlist(userId)
     .then(result=>{
         // console.log(result[0]);
