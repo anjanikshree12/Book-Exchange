@@ -8,12 +8,12 @@
                 <% for (let product of prods) { %>
                     <%if(product.available==0&&path!=' /mybooks'){console.log(path); continue }%>
                         <%if(count%4==0){%>
-                            <div class="row mt-2">
+                            <div class="row mt-2 d-flex justify-content-center">
                                 <div class="card-deck">
                                     <%}%>
 
                                         <div class="card h-70 mt-4 text-center border-light"
-                                            style="width: 16rem;background: rgb(0, 86, 156);color: white;">
+                                            style="width: 16rem;background: whitesmoke;">
 
                                             <div class="card-body">
                                                 <div class="row">
@@ -25,7 +25,7 @@
                                                 <div class="row" style="font-family: 'Playfair Display', serif;">
                                                     <div class="col">
                                                         <h5 class="card-title mt-4"
-                                                            style="font-family: 'Ephesis', cursive;font-size: 30px;">
+                                                            style="font-family: 'Noto Sans Display', sans-serif;font-size: 25px;">
                                                             <%= product.title %>
                                                         </h5>
                                                         <%if(path!=' /mybooks'){%>
@@ -45,7 +45,7 @@
                                                                 </small>
 
                                                                 <%if(product.available==1){%>
-                                                                    <div class="d-flex justify-content-around" style="font-family: 'Indie Flower', cursive;font-size: 20px;">
+                                                                    <div class="d-flex justify-content-around" style="font-family: 'Noto Sans Display', sans-serif;font-size: 18px;">
                                                                         <div class="col">
                                                                             <p>&#8377 <strike>
                                                                                     <%= product.orignal_price %>
@@ -57,7 +57,7 @@
                                                                         </div>
                                                                         </p>
                                                                     </div>
-                                                                    <div class="row mb-3" style="font-family: 'Indie Flower', cursive;font-size: 20px;">
+                                                                    <div class="row mb-3" style="font-family: 'Noto Sans Display', sans-serif;font-size: 16px;">
                                                                         <div class="col">
                                                                             <small>
                                                                                 <%=product.sale%>% off
