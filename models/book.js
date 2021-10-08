@@ -68,21 +68,21 @@ class Book{
     }
 
     static getBookByGenre(genre,orderByPrice,userId){
-            let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books where genre=?  AND available=1 ";
+            let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books where genre=?  AND available=1  AND books.user_id!=?";
          
         if(orderByPrice=='true'){
             command+="ORDER BY orignal_price;"
         }
-        return db.execute(command,[genre]);
+        return db.execute(command,[genre,userId]);
     }
 
     static getBooksbyLanguage(language,orderByPrice,userId){
-        let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books where language=?  AND available=1 ";
+        let command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books where language=?  AND available=1 AND books.user_id!=? ";
      
     if(orderByPrice=='true'){
         command+="ORDER BY orignal_price;"
     }
-    return db.execute(command,[language]);
+    return db.execute(command,[language,userId]);
 }
 
     static getGenre(){
