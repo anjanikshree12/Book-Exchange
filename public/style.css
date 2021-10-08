@@ -5,7 +5,7 @@
 
 .row-content {
     margin:0px auto;
-    padding: 50px 0px 50px 0px;
+    padding: 30px 0px 30px 0px;
     /* border-bottom: 1px ridge; */
     /* border-top: 1px ridge; */
     min-height:65vh;
@@ -13,7 +13,7 @@
 .sellbooks{
     margin-top: 10vh;
 }
-.footer{
+.row-footer{
     margin:0px auto;
     padding: 20px 0px 20px 0px;
     align-items: flex-end;
