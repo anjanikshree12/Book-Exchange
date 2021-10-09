@@ -140,6 +140,11 @@ class Book{
         const command="UPDATE books SET title=?,orignal_price=?,selling_price=?,user_id=?,genre=?,language=?,author_id=?,imageUrl=?,description=?,bcondition=? WHERE books.id=?;  "
         return db.query(command,[title,orignal_price,selling_price,user_id,genre,language,aid,imageUrl,description,bcondition,id]);
     }
+
+    static getSearchedBook(searched){
+        const command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM BOOKS WHERE title LIKE ? AND available=1; ";
+        return db.query(command,[searched]);
+    }
 }
 
 module.exports=Book;
