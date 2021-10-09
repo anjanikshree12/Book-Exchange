@@ -88,10 +88,14 @@ app.use((req,res,next)=>{
 app.use((req, res, next) => {
     res.locals.isAuth  = req.session.isLoggedIn;
     
-    if(req.user)
+    if(req.user){
     res.locals.userId=req.user.id;
-    else
+    res.locals.userEmail=req.user.email;
+    }
+    else{
     res.locals.userId=-1;
+    res.locals.userEmail='';
+    }
     if(req.user){
         Cart.getCartNum(req.user.id).then(result=>{
             res.locals.cartnum=result[0][0].n;

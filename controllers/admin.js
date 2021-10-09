@@ -109,7 +109,7 @@ exports.postEditBook=(req,res,next)=>{
                                         Book.editBookByid(book_id,title,orignal_price,selling_price,user_id,genre,language,aid,public_id,description,condition)
                                         .then(result=>{
                                             console.log('book-updated!');
-                                            res.redirect('/myBooks')
+                                            return res.redirect('/myBooks')
                                         })
                                         .catch(err=>{
                                             console.log(err);
@@ -170,20 +170,20 @@ exports.postAddBook=(req,res,next)=>{
         }
     })
     .then(aid=>{
-                cloudinary_util.uploader.upload(imageUrl, {
+                return cloudinary_util.uploader.upload(imageUrl, {
                     folder: 'bookExchange',
                     format: 'jpg'
                 }).then(imageUpload=>{
                     const public_id=imageUpload.secure_url;
                     console.log(imageUpload);
                     console.log("final"+aid);
-                    file_handling.delete_file(imageUrl).then(filed=>{
+                    return file_handling.delete_file(imageUrl).then(filed=>{
                         const book=new Book(title,orignal_price,selling_price,user_id,genre,language,aid,public_id,description,condition);
-                        console.log(book);
-                        book.addBook()
+                        // console.log(book);
+                        return book.addBook()
                         .then(result=>{
                             console.log('book-updated!');
-                            res.redirect('/myBooks')
+                            return res.redirect('/myBooks')
                         })
                         .catch(err=>{
                             console.log(err);
