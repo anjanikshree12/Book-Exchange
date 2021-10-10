@@ -127,9 +127,11 @@ app.use(authRoutes);
 app.use(shopRoutes);
 app.use(adminRoutes);
 
-const PORT = process.env.PORT || 3000;
+let port = process.env.PORT;
+if(port == null || port == ""){
+  port = 3000;
+}
 
-
-app.listen(PORT, () => {
-    console.log("Server started on port: "+ PORT);
+app.listen(port, function () {
+  console.log("Server has started successfully");
 });
