@@ -142,7 +142,7 @@ class Book{
     }
 
     static getSearchedBook(searched){
-        const command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM BOOKS WHERE title LIKE ? AND available=1; ";
+        const command="SELECT *,round(((orignal_price-selling_price)/orignal_price)*100,2) AS sale FROM books WHERE title LIKE ? AND available=1; ";
         return db.query(command,[searched]);
     }
 }
