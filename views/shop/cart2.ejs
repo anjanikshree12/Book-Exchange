@@ -89,7 +89,7 @@
                                     <div class="card-footer" style="background: white;">
                                         
                                         <div class="row">
-                                            <div class="col-12 col-md-12  d-flex justify-content-end">
+                                            <div class="col-12 col-md-12  d-flex justify-content-around">
                                                 <form action="/order" method="POST">
                                                     <select name="address" class="custom-select col-md-6" id="address" required>
                                                         <%addresses.forEach((address,i)=>{%>
@@ -99,7 +99,7 @@
                                                     <%console.log(books)%>
                                                     <input type="hidden" name="bookIds" value="<%=books%>">
                                                     <button type="submit"
-                                                    class=" border btn-sm rounded bg-success m-2 btn-lg text-white">PLACE
+                                                    class=" border btn-sm bg-success m-2 text-white">PLACE
                                                     ORDER</button>
                                                 </form>
                                                 
@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="row mt-4">
                                     <div class="col">
-                                        <h6>Safe and Secure Payments, Razor Pay Gateway is used for 100% protection from
+                                        <h6>Safe and Secure Payments, RazorPay Payment Gateway is used for 100% protection from
                                             fraud!</h6>
                                     </div>
                                 </div> 

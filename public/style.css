@@ -105,6 +105,10 @@ background-size: 10px 10px;
     .nav2{
         margin-top: 8vh;
     }
+    .booksforsale .row{
+        display: flex;
+        justify-content: space-around;
+    }
 
 }
 
