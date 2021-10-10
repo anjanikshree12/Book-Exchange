@@ -209,6 +209,7 @@ exports.postAddBook=(req,res,next)=>{
 exports.getMyBook=(req,res,next)=>{
     Book.getBookByUserId(req.user.id)
     .then(books=>{
+        console.log('my books:');
         console.log(books[0]);
         res.render('admin/myBook2',{
             prods:books[0],

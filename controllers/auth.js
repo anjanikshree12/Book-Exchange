@@ -3,6 +3,7 @@ const User=require('../models/user')
 const bcrypt=require('bcrypt')
 const Book=require('../models/book')
 const Address=require('../models/address')
+
 exports.getLogin=(req,res,next)=>{
     // console.log(path.join(__dirname,'..','views','auth','login.html'));
     Book.getAllBooks('false',-1).then(result=>{
