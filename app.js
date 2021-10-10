@@ -124,7 +124,7 @@ app.use(authRoutes);
 app.use(shopRoutes);
 app.use(adminRoutes);
 
-const port = Process.env.PORT || 3000 ;
+const port = Process.env.PORT || '3000' ;
 
 app.listen(PORT,()=>{ 
     console.log("server listening to port "+PORT);
