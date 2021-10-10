@@ -60,23 +60,6 @@ background-size: 10px 10px;
 
 .booksforsale .card{
     
-
-    /* padding: 10px;
-    border: 1px solid #000000;
-    box-shadow:  -1px 1px #000000,
-         -2px 2px #000000,
-         -3px 3px #000000,
-         -4px 4px #000000,
-         -5px 5px #000000; */
-         /* box-shadow: 0.5rem 0.5rem black, -0.5rem -0.5rem #ccc; */
-         /* box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
-         0 2px 4px rgba(0,0,0,0.07), 
-         0 4px 8px rgba(0,0,0,0.07), 
-         0 8px 16px rgba(0,0,0,0.07),
-         0 16px 32px rgba(0,0,0,0.07), 
-         0 32px 64px rgba(0,0,0,0.07); */
-         /* box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; */
-
          box-shadow:  0 01px gray,
          01px 0 gray,
          01px 02px gray,
@@ -100,6 +83,9 @@ background-size: 10px 10px;
 
 .myorders,.wishlist, .mybooks,.sellbooks,.cart{
     margin-top: 12vh;
+}
+.emptycart{
+    margin-top: 30vh;
 }
 @media only screen and (max-width: 600px) {
     .nav2{
