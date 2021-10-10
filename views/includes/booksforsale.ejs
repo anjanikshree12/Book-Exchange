@@ -9,9 +9,9 @@
                     <%if(product.available==0&&path!='/mybooks'){console.log(path); continue }%>
                         <%if(count%4==0){%>
                             <div class="row mt-2">
-                                <div class="card-deck">
+                                <div class="card-deck" data-aos="fade-up">
+                                
                                     <%}%>
-
                                         <div class="card h-70 mt-4 text-center border-light"
                                             style="width: 16rem;background: whitesmoke;">
 
@@ -25,7 +25,7 @@
                                                 <div class="row" style="font-family: 'Playfair Display', serif;">
                                                     <div class="col">
                                                         <h5 class="card-title mt-4"
-                                                            style="font-family: 'Noto Sans Display', sans-serif;font-size: 25px;">
+                                                            style="font-family: 'Bebas Neue', cursive;font-size: 25px;">
                                                             <%= product.title %>
                                                         </h5>
                                                         <%if(path!=' /mybooks'){%>
@@ -168,7 +168,7 @@
                 </div>
             </div>
             <% } %>
-                <!-- // -->
+            
 
 
               

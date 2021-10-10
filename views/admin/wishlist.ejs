@@ -16,9 +16,9 @@
                     <% if (prods.length> 0) { %>
                         <% for (let product of prods) { %>
                             <div class="container" >
-                                <div class="row d-flex justify-content-center" >
+                                <div class="row d-flex justify-content-center">
                                     <div class="col-12 col-md-9" >
-                                        <div class="card-deck mt-4 border rounded bg-light">
+                                        <div class="card-deck mt-4 border rounded bg-light" data-aos="flip-up" data-aos-duration="500" >
                                             <div class="col-12 col-md-8 mt-4 mb-4">
                                                 <div class="row align-items-center">
                                                     <div class="card col-4 offset-1 col-md-3"  style="height: 25vh;">
@@ -26,7 +26,7 @@
                                                     </div>
                                                     <div class="col-7 col-md-7">
                                                          <!-- product title -->
-                                                                <h6 style="font-family: 'Noto Sans Display', sans-serif;font-size:25px">
+                                                                <h6 style="font-family: 'Bebas Neue', cursive;font-size:25px">
                                                                     <%= product.title %>
                                                                 </h6>
                                                          <!-- product pricing -->
