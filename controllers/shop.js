@@ -124,6 +124,7 @@ exports.addToWishlist=(req,res,next)=>{
     const bookId=req.body.bookId;
     const userId=req.user.id
     const path=req.body.path;
+    console.log(path);
     Book.getOwner(bookId)
     .then(result=>{
         console.log(result[0]);
@@ -210,6 +211,7 @@ exports.addToCart=(req,res,next)=>{
     const bookId=req.body.bookId;
     const userId=req.user.id
     const path=req.body.path;
+    console.log(path);
     Book.getOwner(bookId)
     .then(result=>{
         console.log(result[0]);
@@ -443,6 +445,34 @@ exports.getBookDetails=(req,res,next)=>{
     })
 
 }
+
+exports.postSearch=(req,res,next)=>{
+    const searched=req.body.searchQuery;
+    res.redirect('/search/?searched='+searched)
+   
+}
+
+exports.getSearch=(req,res,next)=>{
+    const searched=req.query.searched
+    let search='%';
+    search+=searched;
+    search+='%'
+    const path='/search/?searched='+searched
+    console.log(path);
+    Book.getSearchedBook(search)
+    .then(result=>{
+        console.log(result[0]);
+        res.render('auth/loggedin',{
+            prods:result[0],
+            path:path
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+    console.log(searched);
+}
+
 
 // var instance = new Razorpay({ key_id: 'rzp_test_jABxeqkaDNYGkh', key_secret: 'Y7LkvoQ0GkzpHHkrb9IjmvJ9' })
 // var options = {  
