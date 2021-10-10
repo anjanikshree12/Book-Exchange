@@ -126,6 +126,6 @@ app.use(adminRoutes);
 
 const port = Process.env.PORT || 3000 ;
 
-app.listen(port,()=>{ 
-    console.log("server listening to port "+port);
+app.listen(PORT,()=>{ 
+    console.log("server listening to port "+PORT);
 });
