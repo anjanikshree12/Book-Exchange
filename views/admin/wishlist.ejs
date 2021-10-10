@@ -19,21 +19,20 @@
                                 <div class="row d-flex justify-content-center" >
                                     <div class="col-12 col-md-9" >
                                         <div class="card-deck mt-4 border rounded bg-light">
-                                            <div class="col-8 col-md-8 mt-4 mb-4">
+                                            <div class="col-12 col-md-8 mt-4 mb-4">
                                                 <div class="row align-items-center">
-                                                    <div class="card col-5 col-md-3"  style="height: 25vh;">
+                                                    <div class="card col-4 offset-1 col-md-3"  style="height: 25vh;">
                                                         <img src="<%= product.imageUrl %>" alt="pic" style="width: 100%;">
                                                     </div>
-                                                    <div class="col-5 col-md-7">
-                                                        <div class="row mt-4">
-                                                            <div class="col-12 col-md-12">
+                                                    <div class="col-7 col-md-7">
+                                                         <!-- product title -->
                                                                 <h6 style="font-family: 'Noto Sans Display', sans-serif;font-size:25px">
                                                                     <%= product.title %>
                                                                 </h6>
-                                                                
-                                                                <h6>&#8377 <%= product.orignal_price %> <br> <strike>&#8377 <%=
+                                                         <!-- product pricing -->
+                                                                <h6><br> &#8377 <%= product.orignal_price %> <strike>&#8377 <%=
                                                                                 product.selling_price %></strike> <br> <small>
-                                                                            <%=product.sale%> off
+                                                                            <%=product.sale%>% off
                                                                         </small> </h6>
                                                                 <div class="row">
                                                                     <div class="col d-flex justify-content-left">
@@ -49,7 +48,7 @@
                                                                                     class="fa fa-cart-plus"></span></button>
                                                                         </form>
                                                                         <%}else{%>
-                                                                            <p>Sold Out</p>
+                                                                            <p class="mt-4">Sold Out</p>
                                                                             <%}%>
         
         
@@ -63,8 +62,7 @@
                                                                     </div>
                                                                 </div>
         
-                                                            </div>
-                                                        </div>
+                                                           
                                                     </div>
                                                 </div>
                                             </div>
