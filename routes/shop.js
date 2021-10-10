@@ -19,4 +19,6 @@ router.get('/languageBook/:language',isAuth,shopController.getBooksByLanguage)
 router.post('/addToWishlist',isAuth,shopController.addToWishlist)
 router.get('/wishlist',isAuth,shopController.getWishlist)
 router.post('/removeFromWishlist',isAuth,shopController.removeFromWishlist)
+router.post('/search',isAuth,shopController.postSearch)
+router.get('/search',isAuth,shopController.getSearch)
 module.exports=router
