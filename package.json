@@ -31,8 +31,9 @@
     "mysql2": "^2.3.0",
     "popper": "^1.0.1",
     "popper.js": "^1.12.9",
-    "razorpay": "^2.0.7",
-    "nodemon": "^2.0.13"
+    "razorpay": "^2.0.7"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
 }
