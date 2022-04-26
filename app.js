@@ -120,12 +120,10 @@ app.use((req, res, next) => {
 
 sync_db.sync();
 
-
-
-
 app.use(authRoutes);
 app.use(shopRoutes);
 app.use(adminRoutes);
 
+const PORT = process.env.PORT || 5000;
 
-app.listen(3000);
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
